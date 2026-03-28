@@ -39,31 +39,27 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
-            {!loading && (
+            {user ? (
               <>
-                {user ? (
-                  <>
-                    <Link
-                      href="/dashboard"
-                      className={`ml-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                        pathname === "/dashboard"
-                          ? "bg-red text-white"
-                          : "bg-red/80 text-white hover:bg-red"
-                      }`}
-                    >
-                      Dashboard
-                    </Link>
-                    <LogoutButton />
-                  </>
-                ) : (
-                  <Link
-                    href="/auth/login"
-                    className="ml-2 px-3 py-2 rounded-md text-sm font-medium bg-red/80 text-white hover:bg-red transition-colors"
-                  >
-                    Log In
-                  </Link>
-                )}
+                <Link
+                  href="/dashboard"
+                  className={`ml-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    pathname === "/dashboard"
+                      ? "bg-red text-white"
+                      : "bg-red/80 text-white hover:bg-red"
+                  }`}
+                >
+                  Dashboard
+                </Link>
+                <LogoutButton />
               </>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="ml-2 px-3 py-2 rounded-md text-sm font-medium bg-red/80 text-white hover:bg-red transition-colors"
+              >
+                Log In
+              </Link>
             )}
           </div>
           <MobileMenu pathname={pathname} user={user} loading={loading} />
@@ -104,28 +100,24 @@ function MobileMenu({
               {item.label}
             </Link>
           ))}
-          {!loading && (
+          <div className="border-t border-white/10 my-1" />
+          {user ? (
             <>
-              <div className="border-t border-white/10 my-1" />
-              {user ? (
-                <>
-                  <Link
-                    href="/dashboard"
-                    className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
-                  >
-                    Dashboard
-                  </Link>
-                  <MobileLogoutButton />
-                </>
-              ) : (
-                <Link
-                  href="/auth/login"
-                  className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
-                >
-                  Log In
-                </Link>
-              )}
+              <Link
+                href="/dashboard"
+                className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
+              >
+                Dashboard
+              </Link>
+              <MobileLogoutButton />
             </>
+          ) : (
+            <Link
+              href="/auth/login"
+              className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
+            >
+              Log In
+            </Link>
           )}
         </div>
       </details>
