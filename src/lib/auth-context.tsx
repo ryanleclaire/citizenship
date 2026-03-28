@@ -46,12 +46,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const supabase = createClient();
 
   async function fetchProfile(userId: string) {
-    const { data } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", userId)
-      .single();
-    setProfile(data);
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .single();
+      if (error) {
+        console.error("Profile fetch error:", error.message);
+        setProfile(null);
+      } else {
+        setProfile(data);
+      }
+    } catch (err) {
+      console.error("Profile fetch exception:", err);
+      setProfile(null);
+    }
   }
 
   async function refreshProfile() {
