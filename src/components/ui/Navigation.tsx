@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 
 const navItems = [
@@ -42,16 +42,19 @@ export default function Navigation() {
             {!loading && (
               <>
                 {user ? (
-                  <Link
-                    href="/dashboard"
-                    className={`ml-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                      pathname === "/dashboard"
-                        ? "bg-red text-white"
-                        : "bg-red/80 text-white hover:bg-red"
-                    }`}
-                  >
-                    Dashboard
-                  </Link>
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className={`ml-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                        pathname === "/dashboard"
+                          ? "bg-red text-white"
+                          : "bg-red/80 text-white hover:bg-red"
+                      }`}
+                    >
+                      Dashboard
+                    </Link>
+                    <LogoutButton />
+                  </>
                 ) : (
                   <Link
                     href="/auth/login"
@@ -105,12 +108,15 @@ function MobileMenu({
             <>
               <div className="border-t border-white/10 my-1" />
               {user ? (
-                <Link
-                  href="/dashboard"
-                  className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
-                >
-                  Dashboard
-                </Link>
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
+                  >
+                    Dashboard
+                  </Link>
+                  <MobileLogoutButton />
+                </>
               ) : (
                 <Link
                   href="/auth/login"
@@ -124,5 +130,45 @@ function MobileMenu({
         </div>
       </details>
     </div>
+  );
+}
+
+function LogoutButton() {
+  const { signOut } = useAuth();
+  const router = useRouter();
+
+  async function handleLogout() {
+    await signOut();
+    router.push("/");
+    router.refresh();
+  }
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="ml-1 px-3 py-2 rounded-md text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+    >
+      Log Out
+    </button>
+  );
+}
+
+function MobileLogoutButton() {
+  const { signOut } = useAuth();
+  const router = useRouter();
+
+  async function handleLogout() {
+    await signOut();
+    router.push("/");
+    router.refresh();
+  }
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="block w-full text-left px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
+    >
+      Log Out
+    </button>
   );
 }
