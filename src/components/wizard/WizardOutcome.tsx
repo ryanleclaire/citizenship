@@ -100,11 +100,11 @@ export default function WizardOutcome({ outcome, generation, onRestart }: Wizard
       <div className="flex flex-col sm:flex-row gap-3 mt-8">
         {isEligible && (
           <>
-            <Link href="/checklist" className="btn-primary">
-              Build Your Document Checklist
+            <Link href="/family-tree" className="btn-primary">
+              Build Your Family Chain
             </Link>
-            <Link href="/guide" className="btn-secondary">
-              View Step-by-Step Guide
+            <Link href="/checklist" className="btn-secondary">
+              Document Checklist
             </Link>
           </>
         )}
