@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 
 const navItems = [
@@ -125,12 +125,10 @@ function MobileMenu({
 
 function LogoutButton() {
   const { signOut } = useAuth();
-  const router = useRouter();
 
   async function handleLogout() {
     await signOut();
-    router.push("/");
-    router.refresh();
+    window.location.href = "/";
   }
 
   return (
@@ -145,12 +143,10 @@ function LogoutButton() {
 
 function MobileLogoutButton() {
   const { signOut } = useAuth();
-  const router = useRouter();
 
   async function handleLogout() {
     await signOut();
-    router.push("/");
-    router.refresh();
+    window.location.href = "/";
   }
 
   return (
