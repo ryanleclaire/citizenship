@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -7,13 +6,12 @@ export default function Home() {
       {/* Hero Section */}
       <section className="bg-navy text-white py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <Image
+          <img
             src="/images/logo.png"
             alt="Citizenship Mountie"
             width={120}
             height={120}
             className="mx-auto mb-8"
-            priority
           />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
             Discover Your Canadian Citizenship
