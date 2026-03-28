@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lora, DM_Sans } from "next/font/google";
 import Navigation from "@/components/ui/Navigation";
 import Disclaimer from "@/components/ui/Disclaimer";
+import { AuthProvider } from "@/lib/auth-context";
 import "./globals.css";
 
 const lora = Lora({
@@ -30,16 +31,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lora.variable} ${dmSans.variable} font-sans antialiased`}>
-        <Navigation />
-        <main className="min-h-screen">{children}</main>
-        <footer className="bg-navy text-white/60 py-8">
-          <div className="max-w-6xl mx-auto px-4 space-y-4">
-            <Disclaimer />
-            <p className="text-center text-xs">
-              &copy; {new Date().getFullYear()} Citizenship Mountie. Not affiliated with the Government of Canada.
-            </p>
-          </div>
-        </footer>
+        <AuthProvider>
+          <Navigation />
+          <main className="min-h-screen">{children}</main>
+          <footer className="bg-navy text-white/60 py-8">
+            <div className="max-w-6xl mx-auto px-4 space-y-4">
+              <Disclaimer />
+              <p className="text-center text-xs">
+                &copy; {new Date().getFullYear()} Citizenship Mountie. Not affiliated with the Government of Canada.
+              </p>
+            </div>
+          </footer>
+        </AuthProvider>
       </body>
     </html>
   );

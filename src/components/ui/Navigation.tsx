@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/lib/auth-context";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -9,13 +10,13 @@ const navItems = [
   { href: "/family-tree", label: "Family Chain" },
   { href: "/checklist", label: "Checklist" },
   { href: "/guide", label: "Guide" },
-  { href: "/cover-letter", label: "Cover Letter" },
   { href: "/faq", label: "FAQ" },
   { href: "/resources", label: "Resources" },
 ];
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { user, loading } = useAuth();
 
   return (
     <nav className="bg-navy text-white">
@@ -38,15 +39,46 @@ export default function Navigation() {
                 {item.label}
               </Link>
             ))}
+            {!loading && (
+              <>
+                {user ? (
+                  <Link
+                    href="/dashboard"
+                    className={`ml-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                      pathname === "/dashboard"
+                        ? "bg-red text-white"
+                        : "bg-red/80 text-white hover:bg-red"
+                    }`}
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    href="/auth/login"
+                    className="ml-2 px-3 py-2 rounded-md text-sm font-medium bg-red/80 text-white hover:bg-red transition-colors"
+                  >
+                    Log In
+                  </Link>
+                )}
+              </>
+            )}
           </div>
-          <MobileMenu pathname={pathname} />
+          <MobileMenu pathname={pathname} user={user} loading={loading} />
         </div>
       </div>
     </nav>
   );
 }
 
-function MobileMenu({ pathname }: { pathname: string }) {
+function MobileMenu({
+  pathname,
+  user,
+  loading,
+}: {
+  pathname: string;
+  user: { id: string } | null;
+  loading: boolean;
+}) {
   return (
     <div className="md:hidden">
       <details className="relative">
@@ -69,6 +101,26 @@ function MobileMenu({ pathname }: { pathname: string }) {
               {item.label}
             </Link>
           ))}
+          {!loading && (
+            <>
+              <div className="border-t border-white/10 my-1" />
+              {user ? (
+                <Link
+                  href="/dashboard"
+                  className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  className="block px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
+                >
+                  Log In
+                </Link>
+              )}
+            </>
+          )}
         </div>
       </details>
     </div>
