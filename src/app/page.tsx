@@ -134,7 +134,7 @@ export default function Home() {
               { label: "Dual Citizenship", value: "Canada allows dual citizenship" },
             ].map((fact) => (
               <div key={fact.label} className="flex gap-4 items-start">
-                <div className="w-2 h-2 bg-red rounded-full mt-2 shrink-0" />
+                <svg className="w-4 h-4 text-red mt-0.5 shrink-0" viewBox="0 0 64 64" fill="currentColor"><path d="M32 2L28 14L20 8L24 18L12 16L20 24L8 28L18 30L14 40L24 34L22 50L32 42L42 50L40 34L50 40L46 30L56 28L44 24L52 16L40 18L44 8L36 14Z" /></svg>
                 <div>
                   <p className="font-semibold text-sm text-navy">{fact.label}</p>
                   <p className="text-navy-400 text-sm">{fact.value}</p>
