@@ -71,8 +71,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
+    // Check initial session
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      console.log("Initial session check:", { user: session?.user?.email, error: error?.message });
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      if (currentUser) {
+        fetchProfile(currentUser.id).then(() => setLoading(false));
+      } else {
+        setLoading(false);
+      }
+    });
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      async (event, session) => {
+        console.log("Auth state changed:", event, session?.user?.email);
         const currentUser = session?.user ?? null;
         setUser(currentUser);
         if (currentUser) {
