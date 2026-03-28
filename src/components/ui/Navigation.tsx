@@ -16,7 +16,7 @@ const navItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
 
   return (
     <nav className="bg-navy text-white">
@@ -62,7 +62,7 @@ export default function Navigation() {
               </Link>
             )}
           </div>
-          <MobileMenu pathname={pathname} user={user} loading={loading} />
+          <MobileMenu pathname={pathname} user={user} />
         </div>
       </div>
     </nav>
@@ -72,11 +72,9 @@ export default function Navigation() {
 function MobileMenu({
   pathname,
   user,
-  loading,
 }: {
   pathname: string;
   user: { id: string } | null;
-  loading: boolean;
 }) {
   return (
     <div className="md:hidden">
