@@ -9,8 +9,8 @@ export default function Home() {
           <img
             src="/images/logo.png"
             alt="Citizenship Mountie"
-            width={160}
-            height={160}
+            width={240}
+            height={240}
             className="mx-auto mb-8"
           />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight text-navy">
