@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navItems = [
@@ -20,8 +21,17 @@ export default function Navigation() {
     <nav className="bg-navy text-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="font-serif text-lg font-bold tracking-tight">
-            Bill C-3 Guide
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/images/logo.png"
+              alt="Citizenship Mountie"
+              width={40}
+              height={40}
+              className="rounded"
+            />
+            <span className="font-serif text-lg font-bold tracking-tight hidden sm:inline">
+              Citizenship Mountie
+            </span>
           </Link>
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (

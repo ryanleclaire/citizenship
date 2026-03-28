@@ -59,7 +59,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-cream-300">
+    <div className="border-b border-gray-200">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full text-left py-5 flex items-start justify-between gap-4"

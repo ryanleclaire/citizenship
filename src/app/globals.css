@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-cream text-navy font-sans;
+    @apply bg-white text-navy font-sans;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -14,8 +14,8 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 bg-maple text-white font-medium rounded-lg
-           hover:bg-maple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-maple-300 focus:ring-offset-2;
+    @apply inline-flex items-center justify-center px-6 py-3 bg-red text-white font-medium rounded-lg
+           hover:bg-red-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-300 focus:ring-offset-2;
   }
 
   .btn-secondary {
@@ -29,7 +29,7 @@
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-cream-300 p-6;
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
   }
 }
 

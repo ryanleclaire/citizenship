@@ -20,8 +20,8 @@ export default function WizardOption({
         hover:shadow-md active:scale-[0.99]
         ${
           variant === "highlighted"
-            ? "border-sage-400 bg-sage-50 hover:border-sage-600"
-            : "border-cream-300 bg-white hover:border-navy-300"
+            ? "border-red-200 bg-red-50/30 hover:border-red"
+            : "border-gray-200 bg-white hover:border-navy-300"
         }`}
     >
       <span className="font-medium text-lg">{label}</span>

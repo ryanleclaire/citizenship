@@ -17,7 +17,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Bill C-3 Citizenship Guide | Canadian Citizenship by Descent",
+  title: "Citizenship Mountie | Canadian Citizenship Under Bill C-3",
   description:
     "A step-by-step guide to applying for a Canadian citizenship certificate under Bill C-3 (2025). Check your eligibility, build your document checklist, and navigate the application process.",
 };
@@ -36,7 +36,7 @@ export default function RootLayout({
           <div className="max-w-6xl mx-auto px-4 space-y-4">
             <Disclaimer />
             <p className="text-center text-xs">
-              &copy; {new Date().getFullYear()} Bill C-3 Citizenship Guide. Not affiliated with the Government of Canada.
+              &copy; {new Date().getFullYear()} Citizenship Mountie. Not affiliated with the Government of Canada.
             </p>
           </div>
         </footer>

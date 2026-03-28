@@ -39,7 +39,7 @@ export default function ResourcesPage() {
                   href={r.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-maple hover:underline font-medium text-sm"
+                  className="text-red hover:underline font-medium text-sm"
                 >
                   {r.label}
                   <span className="text-navy-300 ml-1">&rarr;</span>
@@ -58,7 +58,7 @@ export default function ResourcesPage() {
                   href={r.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-maple hover:underline font-medium text-sm"
+                  className="text-red hover:underline font-medium text-sm"
                 >
                   {r.label}
                   <span className="text-navy-300 ml-1">&rarr;</span>

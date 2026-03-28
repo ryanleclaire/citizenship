@@ -15,19 +15,19 @@ export default function CoverLetterPage() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-navy-400">
             <li className="flex gap-3">
-              <span className="w-1.5 h-1.5 bg-maple rounded-full mt-2 shrink-0" />
+              <span className="w-1.5 h-1.5 bg-red rounded-full mt-2 shrink-0" />
               A clear family tree from your Canadian ancestor (G0) down to you
             </li>
             <li className="flex gap-3">
-              <span className="w-1.5 h-1.5 bg-maple rounded-full mt-2 shrink-0" />
+              <span className="w-1.5 h-1.5 bg-red rounded-full mt-2 shrink-0" />
               The specific legal section that makes you eligible (e.g., s. 3(1)(g))
             </li>
             <li className="flex gap-3">
-              <span className="w-1.5 h-1.5 bg-maple rounded-full mt-2 shrink-0" />
+              <span className="w-1.5 h-1.5 bg-red rounded-full mt-2 shrink-0" />
               Explanation of any name discrepancies or missing documents
             </li>
             <li className="flex gap-3">
-              <span className="w-1.5 h-1.5 bg-maple rounded-full mt-2 shrink-0" />
+              <span className="w-1.5 h-1.5 bg-red rounded-full mt-2 shrink-0" />
               Note if any ancestors in the chain are deceased
             </li>
           </ul>

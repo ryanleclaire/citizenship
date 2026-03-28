@@ -21,10 +21,10 @@ export default function WizardOutcome({ outcome, generation, onRestart }: Wizard
         <span
           className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
             isEligible
-              ? "bg-sage-100 text-sage-700"
+              ? "bg-green-100 text-green-700"
               : needsResearch
               ? "bg-amber-100 text-amber-700"
-              : "bg-cream-200 text-navy-400"
+              : "bg-gray-100 text-navy-400"
           }`}
         >
           {isEligible
@@ -62,12 +62,12 @@ export default function WizardOutcome({ outcome, generation, onRestart }: Wizard
       )}
 
       {/* Next steps */}
-      <div className="card bg-sage-50/50 border-sage-200 mb-6">
+      <div className="card bg-green-50/50 border-green-200 mb-6">
         <h3 className="font-semibold mb-3">Next Steps</h3>
         <ol className="space-y-2">
           {info.nextSteps.map((step, i) => (
             <li key={i} className="flex gap-3 text-sm text-navy-400">
-              <span className="w-6 h-6 bg-sage-200 rounded-full flex items-center justify-center text-xs font-bold text-sage-700 shrink-0">
+              <span className="w-6 h-6 bg-green-200 rounded-full flex items-center justify-center text-xs font-bold text-green-700 shrink-0">
                 {i + 1}
               </span>
               {step}
@@ -88,9 +88,9 @@ export default function WizardOutcome({ outcome, generation, onRestart }: Wizard
       )}
 
       {info.legalCounselRecommended && (
-        <div className="bg-maple-50 border border-maple-200 rounded-lg p-4 mb-6 text-sm">
-          <strong className="text-maple-700">Legal counsel recommended.</strong>{" "}
-          <span className="text-maple-600">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 text-sm">
+          <strong className="text-red-700">Legal counsel recommended.</strong>{" "}
+          <span className="text-red-600">
             Due to the complexity of your case, consider consulting a licensed immigration lawyer or RCIC.
           </span>
         </div>

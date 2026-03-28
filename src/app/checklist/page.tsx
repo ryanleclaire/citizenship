@@ -32,8 +32,8 @@ function CheckboxItem({
     <div
       className={`p-4 rounded-lg border-2 transition-colors ${
         checked
-          ? "border-sage-400 bg-sage-50/50"
-          : "border-cream-300 bg-white"
+          ? "border-green-400 bg-green-50/50"
+          : "border-gray-200 bg-white"
       }`}
     >
       <label className="flex gap-3 cursor-pointer">
@@ -41,7 +41,7 @@ function CheckboxItem({
           type="checkbox"
           checked={checked}
           onChange={onToggle}
-          className="mt-1 h-5 w-5 rounded border-cream-300 text-sage accent-sage shrink-0"
+          className="mt-1 h-5 w-5 rounded border-gray-300 text-red accent-red shrink-0"
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
@@ -53,11 +53,11 @@ function CheckboxItem({
               {doc.label}
             </span>
             {doc.required ? (
-              <span className="text-[10px] font-bold uppercase tracking-wider text-maple bg-maple-50 px-1.5 py-0.5 rounded shrink-0">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-red bg-red-50 px-1.5 py-0.5 rounded shrink-0">
                 Required
               </span>
             ) : (
-              <span className="text-[10px] font-bold uppercase tracking-wider text-sage-600 bg-sage-100 px-1.5 py-0.5 rounded shrink-0">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-navy-400 bg-gray-100 px-1.5 py-0.5 rounded shrink-0">
                 Recommended
               </span>
             )}
@@ -65,7 +65,7 @@ function CheckboxItem({
           <p className="text-sm text-navy-400 mt-1">{doc.description}</p>
           <p className="text-xs text-navy-300 mt-0.5">For: {doc.forPerson}</p>
           {doc.tip && (
-            <div className="mt-2 bg-cream-100 rounded px-3 py-2 text-xs text-navy-400">
+            <div className="mt-2 bg-gray-50 rounded px-3 py-2 text-xs text-navy-400">
               <strong className="text-navy-500">Tip:</strong> {doc.tip}
             </div>
           )}
@@ -186,7 +186,7 @@ export default function ChecklistPage() {
           document you need. Not sure?{" "}
           <Link
             href="/eligibility"
-            className="text-maple hover:underline font-medium"
+            className="text-red hover:underline font-medium"
           >
             Check your eligibility first.
           </Link>
@@ -208,8 +208,8 @@ export default function ChecklistPage() {
                 }}
                 className={`p-3 rounded-lg border-2 text-center transition-all ${
                   selectedGen === g.value
-                    ? "border-maple bg-maple-50 text-maple-700"
-                    : "border-cream-300 bg-white hover:border-navy-200"
+                    ? "border-red bg-red-50 text-red-700"
+                    : "border-gray-200 bg-white hover:border-navy-200"
                 }`}
               >
                 <span className="block font-bold text-lg">{g.label}</span>
@@ -243,20 +243,20 @@ export default function ChecklistPage() {
                   <p className="text-xs text-navy-300">total</p>
                 </div>
               </div>
-              <div className="w-full bg-cream-200 rounded-full h-3">
+              <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className="h-3 rounded-full transition-all duration-500 bg-sage"
+                  className="h-3 rounded-full transition-all duration-500 bg-red"
                   style={{
                     width: `${totalAll > 0 ? (completedAll / totalAll) * 100 : 0}%`,
                   }}
                 />
               </div>
               {completedAll === totalAll && totalAll > 0 && (
-                <p className="mt-3 text-sm text-sage-600 font-medium">
+                <p className="mt-3 text-sm text-green-600 font-medium">
                   All documents checked off! Ready to move on to the{" "}
                   <Link
                     href="/guide"
-                    className="text-maple hover:underline"
+                    className="text-red hover:underline"
                   >
                     application guide
                   </Link>
@@ -301,7 +301,7 @@ export default function ChecklistPage() {
                       className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
                         activeConditionals.has(section.id)
                           ? "border-navy-300 bg-navy-50"
-                          : "border-cream-300 bg-white hover:border-navy-200"
+                          : "border-gray-200 bg-white hover:border-navy-200"
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -309,7 +309,7 @@ export default function ChecklistPage() {
                           className={`w-5 h-5 rounded border-2 flex items-center justify-center shrink-0 transition-colors ${
                             activeConditionals.has(section.id)
                               ? "border-navy bg-navy"
-                              : "border-cream-300"
+                              : "border-gray-300"
                           }`}
                         >
                           {activeConditionals.has(section.id) && (
@@ -369,7 +369,7 @@ export default function ChecklistPage() {
                     Bill C-3 claims.
                   </span>
                 </div>
-                <div className="bg-cream-200 border border-cream-300 rounded-lg p-4 text-sm">
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm">
                   <strong className="text-navy-500">
                     All copies must be clear, legible COLOR copies.
                   </strong>{" "}
@@ -382,11 +382,11 @@ export default function ChecklistPage() {
             )}
 
             {selectedGen === "G5+" && (
-              <div className="mt-3 bg-maple-50 border border-maple-200 rounded-lg p-4 text-sm">
-                <strong className="text-maple-700">
+              <div className="mt-3 bg-red-50 border border-red-200 rounded-lg p-4 text-sm">
+                <strong className="text-red-700">
                   Legal counsel strongly recommended.
                 </strong>{" "}
-                <span className="text-maple-600">
+                <span className="text-red-600">
                   G5+ claims involve significant documentary complexity. Older
                   records may only be available from Library and Archives Canada,
                   provincial archives, or church records.
@@ -395,7 +395,7 @@ export default function ChecklistPage() {
             )}
 
             {/* Next step CTA */}
-            <div className="mt-10 pt-8 border-t border-cream-300 flex flex-col sm:flex-row gap-3">
+            <div className="mt-10 pt-8 border-t border-gray-200 flex flex-col sm:flex-row gap-3">
               <Link href="/guide" className="btn-primary">
                 Continue to Application Guide
               </Link>

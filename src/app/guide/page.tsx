@@ -41,11 +41,11 @@ export default function GuidePage() {
           {steps.map((step) => (
             <Link key={step.number} href={step.href} className="card block group hover:shadow-md transition-shadow">
               <div className="flex gap-4 items-start">
-                <div className="w-10 h-10 bg-maple rounded-full flex items-center justify-center text-white font-bold shrink-0">
+                <div className="w-10 h-10 bg-red rounded-full flex items-center justify-center text-white font-bold shrink-0">
                   {step.number}
                 </div>
                 <div>
-                  <h2 className="text-xl font-serif font-semibold group-hover:text-maple transition-colors">
+                  <h2 className="text-xl font-serif font-semibold group-hover:text-red transition-colors">
                     {step.title}
                   </h2>
                   <p className="text-navy-400 text-sm mt-1">{step.description}</p>
