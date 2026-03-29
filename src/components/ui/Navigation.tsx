@@ -24,7 +24,7 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 font-serif text-lg font-bold tracking-tight">
-            <Image src="/images/favicon.png" alt="" width={28} height={28} className="rounded-sm" />
+            <Image src="/images/favicon.png" alt="" width={56} height={56} className="rounded-sm" />
             Citizenship Mountie
           </Link>
           <div className="hidden md:flex items-center gap-1">
