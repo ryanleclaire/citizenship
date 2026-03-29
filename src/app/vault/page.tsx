@@ -341,9 +341,18 @@ export default function VaultPage() {
       <div className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4">
           <h1 className="text-3xl md:text-4xl font-serif font-bold mb-3">Document Vault</h1>
+          <p className="text-navy-400 mb-8">
+            The Document Vault is your personal workspace for organizing every document in your
+            citizenship application. Track what you&apos;ve ordered, what&apos;s arrived, and upload
+            scanned copies &mdash; all organized by each person in your family chain. No more
+            spreadsheets or scattered files.
+          </p>
           <div className="card border-red border-2 bg-red-50/30">
             <h2 className="font-serif font-semibold text-lg text-navy mb-2">Sign in to use the Document Vault</h2>
-            <p className="text-sm text-navy-400 mb-4">Track, organize, and upload your citizenship application documents.</p>
+            <p className="text-sm text-navy-400 mb-4">
+              The Document Vault is available with a paid subscription. Sign in or subscribe to
+              track document status, store order info, and upload files for your entire family chain.
+            </p>
             <div className="flex gap-3">
               <Link href="/auth/login" className="btn-primary">Log In</Link>
               <Link href="/pricing" className="btn-outline">View Plans</Link>
@@ -379,9 +388,15 @@ export default function VaultPage() {
       <div className="py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-4">
           <h1 className="text-3xl md:text-4xl font-serif font-bold mb-3">Document Vault</h1>
+          <p className="text-navy-400 mb-8">
+            The Document Vault is your personal workspace for organizing every document in your
+            citizenship application. Track what you&apos;ve ordered, what&apos;s arrived, and upload
+            scanned copies &mdash; all organized by each person in your family chain.
+          </p>
           <div className="card text-center py-10">
             <p className="text-navy-400 mb-4">
-              You don&apos;t have any saved documents in your vault yet. Build your family chain first, then come back here to track your documents.
+              You don&apos;t have any saved documents in your vault yet. Build your family chain first &mdash;
+              the vault will automatically create a tracker for every document you need based on your chain.
             </p>
             <Link href="/family-tree" className="btn-primary">Build Your Family Chain</Link>
           </div>
