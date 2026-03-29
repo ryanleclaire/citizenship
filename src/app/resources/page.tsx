@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import {
   IRCC_LINKS,
   LEGAL_ANALYSIS_LINKS,
@@ -75,7 +76,7 @@ function ResourceSection({
 }: {
   title: string;
   description?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div className="mb-10">
