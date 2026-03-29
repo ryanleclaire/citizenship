@@ -102,6 +102,47 @@ Understanding why this is complex requires knowing how Canadian citizenship law 
 - **2009 and 2015 amendments**: Restored citizenship to ~20,000 "Lost Canadians"
 - **December 15, 2025**: Bill C-3 removes the first-generation limit, addresses remaining Lost Canadians
 
+## Quebec Ancestry — Special Considerations
+
+### Civil Registration History
+
+Quebec has a unique vital records system that creates significant challenges for Bill C-3 applicants:
+
+- **1621–1993**: Births were recorded by churches (primarily Catholic parish registers), not by the government. The "acte de baptême" (baptismal record) served as the official record of birth. Registers were kept in duplicate — one at the parish, one at the local courthouse.
+- **1926**: Quebec created a mechanism for non-religious civil registration, but it was rarely used.
+- **January 1, 1994**: The Directeur de l'état civil (DEQ) was established as the sole civil registrar under the new Civil Code of Quebec. All births from this date forward are government-registered.
+- **1994–2000s**: The DEQ undertook a massive project to transfer older church records into the civil register, focusing primarily on records from ~1900 onward. Transfer was incomplete for very old records.
+
+### Obtaining Quebec Birth Records
+
+1. **Directeur de l'état civil (DEQ)** — etatcivil.gouv.qc.ca. Request a "copie d'acte de naissance" (long-form equivalent). ~$20 CAD, 4-8 weeks by mail.
+2. **Parish churches and diocesan archives** — If DEQ cannot locate the record. Major dioceses: Québec, Montréal, Trois-Rivières, Sherbrooke, Chicoutimi, Rimouski. ~$15-$50 CAD.
+3. **BAnQ** — Holds the Drouin Collection (virtually all Quebec parish registers 1621–~1940). Research resource, not a source of certified copies.
+4. **FamilySearch.org** (free) and **Ancestry.ca** (paid) — Digitized Drouin Collection. Use for research to identify parish and dates, then order certified copies from DEQ or the parish.
+
+### IRCC and Quebec Baptismal Certificates
+
+- IRCC's general rule: long-form birth certificate required, baptismal certificates not accepted.
+- For Quebec pre-1994: the DEQ-issued "copie d'acte de naissance" is the equivalent and accepted without question.
+- If DEQ has no record: submit the church baptismal certificate + DEQ negative search letter + cover letter explaining Quebec's civil registration history.
+- Immigration lawyers recommend proactively explaining the Quebec system to IRCC officers who may not be familiar with it.
+
+### Quebec Name Challenges
+
+- **Dit names**: "Lafleur dit Beaulieu" — families used alternate surnames; descendants may use either.
+- **Anglicization**: "Leblanc" → "White", "Boisvert" → "Greenwood", "Roy" → "King"
+- **Spelling variation**: Pre-20th century records have rampant inconsistency ("Pelletier"/"Peltier"/"Péletier")
+- **Women's names**: Quebec records use maiden names (nom de naissance), helpful for tracing lineage
+- **Latin records**: Very old parish records (pre-1800s) may be in Latin, requiring certified translation
+
+### Key Tips for Quebec Claims
+
+- French-language documents do NOT need translation for IRCC (French is an official language of Canada)
+- Latin documents DO need certified translation
+- Always try the DEQ first, even for very old births — their negative search letter is itself a useful supporting document
+- The Drouin Collection on FamilySearch.org is the best starting point for research
+- Consider hiring a Quebec-based professional genealogist for complex cases (FQSG and SGCF can provide referrals)
+
 ## Common Questions from Reddit / Community
 
 ### "Can I claim through a grandparent?"
