@@ -45,6 +45,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async function fetchProfile(_userId: string) {
     try {
       const res = await fetch("/api/profile");
