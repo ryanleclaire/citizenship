@@ -56,6 +56,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         console.error("Profile fetch error:", error.message);
         setProfile(null);
       } else {
+        console.log("Profile fetched:", data?.subscription_tier, data);
         setProfile(data);
       }
     } catch (err) {
