@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useAuth } from "@/lib/auth-context";
 import {
   type ChainPerson,
   buildChain,
@@ -16,9 +17,108 @@ const chainOptions = [
   { generations: 5, label: "G5", desc: "Great-great-great-grandparent is the anchor" },
 ];
 
+// Serialize chain for saving (convert Set to Array)
+function serializeChain(chain: ChainPerson[]) {
+  return chain.map((p) => ({
+    ...p,
+    checkedDocs: Array.from(p.checkedDocs),
+  }));
+}
+
+// Deserialize chain from DB (convert Array back to Set)
+function deserializeChain(data: unknown[]): ChainPerson[] {
+  return (data as Record<string, unknown>[]).map((p) => ({
+    ...p,
+    checkedDocs: new Set((p.checkedDocs as string[]) || []),
+  })) as unknown as ChainPerson[];
+}
+
 export default function FamilyTreePage() {
+  const { user, isPaid } = useAuth();
   const [chain, setChain] = useState<ChainPerson[] | null>(null);
   const [, setSelectedCount] = useState<number | null>(null);
+  const [appId, setAppId] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [lastSaved, setLastSaved] = useState<string | null>(null);
+  const [loadingApp, setLoadingApp] = useState(true);
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Load existing application for paid users
+  useEffect(() => {
+    if (!user || !isPaid) {
+      setLoadingApp(false);
+      return;
+    }
+    async function loadApp() {
+      try {
+        const res = await fetch("/api/applications");
+        const data = await res.json();
+        if (data.applications?.length > 0) {
+          const app = data.applications[0];
+          setAppId(app.id);
+          if (app.chain_data?.length > 0) {
+            setChain(deserializeChain(app.chain_data));
+            setSelectedCount(app.chain_data.length - 1);
+          }
+        }
+      } catch {
+        // silently fail
+      }
+      setLoadingApp(false);
+    }
+    loadApp();
+  }, [user, isPaid]);
+
+  // Auto-save when chain changes (debounced)
+  useEffect(() => {
+    if (!chain || !isPaid || !user) return;
+
+    if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    saveTimeoutRef.current = setTimeout(() => {
+      saveChain(chain);
+    }, 1500);
+
+    return () => {
+      if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chain, isPaid, user]);
+
+  async function saveChain(chainToSave: ChainPerson[]) {
+    setSaving(true);
+    const serialized = serializeChain(chainToSave);
+    const generation = `G${chainToSave.length - 1}`;
+
+    try {
+      if (appId) {
+        // Update existing
+        await fetch(`/api/applications/${appId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chain_data: serialized, generation }),
+        });
+      } else {
+        // Create new
+        const res = await fetch("/api/applications", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: "My Application",
+            chain_data: serialized,
+            generation,
+          }),
+        });
+        const data = await res.json();
+        if (data.application?.id) {
+          setAppId(data.application.id);
+        }
+      }
+      setLastSaved(new Date().toLocaleTimeString());
+    } catch {
+      // silently fail
+    }
+    setSaving(false);
+  }
 
   function startChain(generationCount: number) {
     setSelectedCount(generationCount);
@@ -58,6 +158,10 @@ export default function FamilyTreePage() {
   const checkedDocs = chain
     ? chain.reduce((sum, p) => sum + p.checkedDocs.size, 0)
     : 0;
+
+  if (loadingApp) {
+    return <div className="py-16 text-center text-navy-400">Loading...</div>;
+  }
 
   return (
     <div className="py-12 md:py-16">
@@ -111,15 +215,22 @@ export default function FamilyTreePage() {
                     {checkedDocs} of {totalDocs} documents obtained
                   </p>
                 </div>
-                <button
-                  onClick={() => {
-                    setChain(null);
-                    setSelectedCount(null);
-                  }}
-                  className="text-sm text-navy-400 hover:text-red transition-colors"
-                >
-                  Start over
-                </button>
+                <div className="flex items-center gap-3">
+                  {isPaid && (
+                    <span className="text-xs text-navy-300">
+                      {saving ? "Saving..." : lastSaved ? `Saved ${lastSaved}` : ""}
+                    </span>
+                  )}
+                  <button
+                    onClick={() => {
+                      setChain(null);
+                      setSelectedCount(null);
+                    }}
+                    className="text-sm text-navy-400 hover:text-red transition-colors"
+                  >
+                    Start over
+                  </button>
+                </div>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
@@ -163,6 +274,11 @@ export default function FamilyTreePage() {
               <Link href="/cover-letter" className="btn-primary">
                 Draft a Cover Letter
               </Link>
+              {isPaid && (
+                <Link href="/vault" className="btn-outline">
+                  Open Document Vault
+                </Link>
+              )}
               <Link href="/guide" className="btn-outline">
                 View Application Guide
               </Link>
