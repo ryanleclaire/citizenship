@@ -33,6 +33,7 @@ interface ChainPersonInput {
   name: string;
   birthPlace: string;
   birthYear: string;
+  gender: "male" | "female" | "";
   isDeceased: boolean;
 }
 
@@ -78,9 +79,12 @@ export async function POST(request: NextRequest) {
 
   // Build the chain description for the prompt
   const chainDescription = chain.map((person) => {
+    const genderLabel = person.gender === "male" ? "Male" : person.gender === "female" ? "Female" : "Not specified";
+    const pronounNote = person.gender === "male" ? "Use he/him/his pronouns" : person.gender === "female" ? "Use she/her/her pronouns" : "";
     const parts = [
       `${person.generationLabel} (${person.relationLabel}): ${person.name || "[Name not provided]"}`,
       `Born: ${person.birthPlace || "[Place not provided]"}, ${person.birthYear || "[Year not provided]"}`,
+      `Gender: ${genderLabel}${pronounNote ? ` — ${pronounNote}` : ""}`,
       `Role: ${person.role}`,
     ];
     if (person.isDeceased) parts.push("Status: Deceased");
@@ -108,7 +112,7 @@ Your cover letters should:
 - Be formatted as a proper letter with date, address, salutation, body, and closing
 - Include a document list/index at the end
 
-IMPORTANT: Do not fabricate details. Use only information provided by the user. If information is missing, use placeholder brackets like [INSERT DATE] so the user can fill them in.`;
+IMPORTANT: Use the exact names provided — do not alter, shorten, or change any names. Use the correct gendered relationship terms (grandmother/grandfather, mother/father, etc.) and pronouns (he/him or she/her) as indicated for each person. Do not fabricate details. Use only information provided by the user. If information is missing, use placeholder brackets like [INSERT DATE] so the user can fill them in.`;
 
   const userPrompt = `Please draft a cover letter for a Canadian citizenship certificate application (CIT 0001) based on the following information:
 

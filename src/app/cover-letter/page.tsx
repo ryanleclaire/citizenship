@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import Link from "next/link";
 
+type Gender = "male" | "female" | "";
+
 interface ChainEntry {
   role: "anchor" | "intermediate" | "applicant";
   generationLabel: string;
@@ -11,10 +13,29 @@ interface ChainEntry {
   name: string;
   birthPlace: string;
   birthYear: string;
+  gender: Gender;
   isDeceased: boolean;
 }
 
-const RELATION_LABELS: Record<number, string> = {
+const RELATION_LABELS_M: Record<number, string> = {
+  0: "You (Applicant)",
+  1: "Father",
+  2: "Grandfather",
+  3: "Great-Grandfather",
+  4: "Great-Great-Grandfather",
+  5: "Great-Great-Great-Grandfather",
+};
+
+const RELATION_LABELS_F: Record<number, string> = {
+  0: "You (Applicant)",
+  1: "Mother",
+  2: "Grandmother",
+  3: "Great-Grandmother",
+  4: "Great-Great-Grandmother",
+  5: "Great-Great-Great-Grandmother",
+};
+
+const RELATION_LABELS_NEUTRAL: Record<number, string> = {
   0: "You (Applicant)",
   1: "Parent",
   2: "Grandparent",
@@ -23,25 +44,33 @@ const RELATION_LABELS: Record<number, string> = {
   5: "Great-Great-Great-Grandparent",
 };
 
+function getRelationLabel(distance: number, gender: Gender): string {
+  if (gender === "male") return RELATION_LABELS_M[distance] || `${distance}x Great-Grandfather`;
+  if (gender === "female") return RELATION_LABELS_F[distance] || `${distance}x Great-Grandmother`;
+  return RELATION_LABELS_NEUTRAL[distance] || `${distance}x Great-Grandparent`;
+}
+
 function buildEmptyChain(generations: number): ChainEntry[] {
   const chain: ChainEntry[] = [];
   chain.push({
     role: "anchor",
     generationLabel: "G0",
-    relationLabel: RELATION_LABELS[generations] || `${generations}x Great-Grandparent`,
+    relationLabel: getRelationLabel(generations, ""),
     name: "",
     birthPlace: "",
     birthYear: "",
+    gender: "",
     isDeceased: false,
   });
   for (let i = 1; i < generations; i++) {
     chain.push({
       role: "intermediate",
       generationLabel: `G${i}`,
-      relationLabel: RELATION_LABELS[generations - i] || "Ancestor",
+      relationLabel: getRelationLabel(generations - i, ""),
       name: "",
       birthPlace: "",
       birthYear: "",
+      gender: "",
       isDeceased: false,
     });
   }
@@ -52,6 +81,7 @@ function buildEmptyChain(generations: number): ChainEntry[] {
     name: "",
     birthPlace: "",
     birthYear: "",
+    gender: "",
     isDeceased: false,
   });
   return chain;
@@ -78,7 +108,13 @@ export default function CoverLetterPage() {
   function updateChainPerson(index: number, field: keyof ChainEntry, value: string | boolean) {
     setChain((prev) => {
       const next = [...prev];
-      next[index] = { ...next[index], [field]: value };
+      const person = { ...next[index], [field]: value };
+      // Recalculate relation label when gender changes
+      if (field === "gender" && person.role !== "applicant" && generations) {
+        const distance = person.role === "anchor" ? generations : generations - index;
+        person.relationLabel = getRelationLabel(distance, person.gender);
+      }
+      next[index] = person;
       return next;
     });
   }
@@ -243,7 +279,7 @@ export default function CoverLetterPage() {
                             </p>
                           </div>
                         </div>
-                        <div className="grid sm:grid-cols-3 gap-3">
+                        <div className="grid sm:grid-cols-2 gap-3">
                           <input
                             type="text"
                             value={person.name}
@@ -251,6 +287,19 @@ export default function CoverLetterPage() {
                             placeholder="Full legal name"
                             className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red bg-white text-navy"
                           />
+                          {person.role !== "applicant" && (
+                            <select
+                              value={person.gender}
+                              onChange={(e) => updateChainPerson(index, "gender", e.target.value)}
+                              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300 focus:border-red bg-white text-navy"
+                            >
+                              <option value="">Relationship...</option>
+                              <option value="male">{getRelationLabel(person.role === "anchor" ? generations! : generations! - index, "male")}</option>
+                              <option value="female">{getRelationLabel(person.role === "anchor" ? generations! : generations! - index, "female")}</option>
+                            </select>
+                          )}
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-3 mt-3">
                           <input
                             type="text"
                             value={person.birthPlace}
