@@ -16,7 +16,7 @@ export const PLANS = {
       "Document checklist (save progress)",
       "Cover letter builder",
       "PDF export",
-      "1 application",
+      "Track 1 applicant",
     ],
   },
   family: {
@@ -26,8 +26,8 @@ export const PLANS = {
     period: "month",
     features: [
       "Everything in Individual",
-      "Up to 10 family member applications",
-      "Manage all applications from one account",
+      "Track up to 10 family members",
+      "Manage everyone from one account",
     ],
   },
 } as const;

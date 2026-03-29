@@ -80,8 +80,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error: limit === 0
-          ? "Subscribe to create applications."
-          : `You've reached the maximum of ${limit} application${limit === 1 ? "" : "s"} on your ${tier} plan.`,
+          ? "Subscribe to track applicants."
+          : `You've reached the maximum of ${limit} applicant${limit === 1 ? "" : "s"} on your ${tier} plan.`,
         limit,
         count: count ?? 0,
       },
