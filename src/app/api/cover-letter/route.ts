@@ -88,8 +88,6 @@ export async function POST(request: NextRequest) {
   }).join("\n\n");
 
   const generationCount = chain.length - 1;
-  const applicant = chain[chain.length - 1];
-  const anchor = chain[0];
 
   const systemPrompt = `You are an expert Canadian immigration document writer specializing in citizenship by descent applications under Bill C-3 (An Act to Amend the Citizenship Act, 2025). You draft professional, clear cover letters to accompany CIT 0001 applications submitted to Immigration, Refugees and Citizenship Canada (IRCC).
 
