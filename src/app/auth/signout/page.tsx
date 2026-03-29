@@ -6,7 +6,12 @@ import { createClient } from "@/lib/supabase/client";
 export default function SignOutPage() {
   useEffect(() => {
     const supabase = createClient();
-    supabase.auth.signOut().then(() => {
+    // Redirect after 2s even if signOut hangs
+    const timeout = setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+    supabase.auth.signOut().finally(() => {
+      clearTimeout(timeout);
       window.location.href = "/";
     });
   }, []);
