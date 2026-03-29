@@ -1,6 +1,3 @@
-"use client";
-
-import type { ReactNode } from "react";
 import {
   IRCC_LINKS,
   LEGAL_ANALYSIS_LINKS,
@@ -28,74 +25,35 @@ const officialResources = [
 ];
 
 const legalResources = [
-  {
-    label: "Hayer Law — \"No, Bill C-3 Does Not Create a New Second-Generation Limit\"",
-    href: LEGAL_ANALYSIS_LINKS.hayerLaw,
-  },
-  {
-    label: "Dentons — \"Bill C-3 Restores Canadian Citizenship to Lost Canadians\"",
-    href: LEGAL_ANALYSIS_LINKS.dentons,
-  },
-  {
-    label: "EY Global Tax Alert — Bill C-3 Comes Into Force",
-    href: LEGAL_ANALYSIS_LINKS.eyTaxAlert,
-  },
-  {
-    label: "Canadian Bar Association — Submission on Bill C-3",
-    href: LEGAL_ANALYSIS_LINKS.cbaSubmission,
-  },
-  {
-    label: "LostCanadian.com — Advocacy & Resources for Lost Canadians",
-    href: LEGAL_ANALYSIS_LINKS.lostCanadian,
-  },
+  { label: "Hayer Law \u2014 No, Bill C-3 Does Not Create a New Second-Generation Limit", href: LEGAL_ANALYSIS_LINKS.hayerLaw },
+  { label: "Dentons \u2014 Bill C-3 Restores Canadian Citizenship to Lost Canadians", href: LEGAL_ANALYSIS_LINKS.dentons },
+  { label: "EY Global Tax Alert \u2014 Bill C-3 Comes Into Force", href: LEGAL_ANALYSIS_LINKS.eyTaxAlert },
+  { label: "Canadian Bar Association \u2014 Submission on Bill C-3", href: LEGAL_ANALYSIS_LINKS.cbaSubmission },
+  { label: "LostCanadian.com \u2014 Advocacy & Resources for Lost Canadians", href: LEGAL_ANALYSIS_LINKS.lostCanadian },
 ];
 
 const communityResources = [
-  { label: "r/Canadiancitizenship", href: IRCC_LINKS.subreddit, description: "The most active community for citizenship-by-descent applicants" },
-  { label: "r/Canadiancitizenship Wiki", href: "https://www.reddit.com/r/Canadiancitizenship/wiki/index/", description: "Community-maintained guide and resources" },
-  { label: "r/ImmigrationCanada", href: "https://www.reddit.com/r/ImmigrationCanada/", description: "Broader Canadian immigration discussions" },
-  { label: "r/AmerExit", href: "https://www.reddit.com/r/AmerExit/", description: "Americans exploring Canadian citizenship and relocation" },
+  { label: "r/Canadiancitizenship", href: IRCC_LINKS.subreddit, desc: "The most active community for citizenship-by-descent applicants" },
+  { label: "r/Canadiancitizenship Wiki", href: "https://www.reddit.com/r/Canadiancitizenship/wiki/index/", desc: "Community-maintained guide and resources" },
+  { label: "r/ImmigrationCanada", href: "https://www.reddit.com/r/ImmigrationCanada/", desc: "Broader Canadian immigration discussions" },
+  { label: "r/AmerExit", href: "https://www.reddit.com/r/AmerExit/", desc: "Americans exploring Canadian citizenship and relocation" },
 ];
 
 const genealogyResources = [
-  { label: "Library and Archives Canada — Genealogy", href: GENEALOGY_LINKS.libraryArchivesCanada, description: "Historical citizenship, immigration, and naturalization records" },
-  { label: "FamilySearch.org", href: GENEALOGY_LINKS.familySearch, description: "Free genealogy database with extensive Canadian records including Quebec parish registers" },
-  { label: "Ancestry.ca", href: GENEALOGY_LINKS.ancestryCa, description: "Canadian census, vital, and immigration records (subscription)" },
-  { label: "BAnQ (Bibliothèque et Archives nationales du Québec)", href: GENEALOGY_LINKS.banq, description: "Quebec church records, the Drouin Collection, and provincial archives" },
-  { label: "Automated Genealogy", href: GENEALOGY_LINKS.automatedGenealogy, description: "Searchable Canadian census records (1901, 1906, 1911)" },
+  { label: "Library and Archives Canada \u2014 Genealogy", href: GENEALOGY_LINKS.libraryArchivesCanada, desc: "Historical citizenship, immigration, and naturalization records" },
+  { label: "FamilySearch.org", href: GENEALOGY_LINKS.familySearch, desc: "Free genealogy database with extensive Canadian records including Quebec parish registers" },
+  { label: "Ancestry.ca", href: GENEALOGY_LINKS.ancestryCa, desc: "Canadian census, vital, and immigration records (subscription)" },
+  { label: "BAnQ (Biblioth\u00e8que et Archives nationales du Qu\u00e9bec)", href: GENEALOGY_LINKS.banq, desc: "Quebec church records, the Drouin Collection, and provincial archives" },
+  { label: "Automated Genealogy", href: GENEALOGY_LINKS.automatedGenealogy, desc: "Searchable Canadian census records (1901, 1906, 1911)" },
 ];
 
 const usResources = [
-  { label: "USA.gov — Birth Certificates", href: "https://www.usa.gov/birth-certificates", description: "How to order birth certificates from each US state" },
-  { label: "VitalChek", href: "https://www.vitalchek.com/", description: "Authorized vendor for ordering vital records from many US states" },
-  { label: "CDC — State Vital Records Contacts", href: "https://www.cdc.gov/nchs/w2w/index.htm", description: "Official directory of all 50 state vital records offices" },
+  { label: "USA.gov \u2014 Birth Certificates", href: "https://www.usa.gov/birth-certificates", desc: "How to order birth certificates from each US state" },
+  { label: "VitalChek", href: "https://www.vitalchek.com/", desc: "Authorized vendor for ordering vital records from many US states" },
+  { label: "CDC \u2014 State Vital Records Contacts", href: "https://www.cdc.gov/nchs/w2w/index.htm", desc: "Official directory of all 50 state vital records offices" },
 ];
 
-function ResourceSection({
-  title,
-  description,
-  children,
-}: {
-  title: string;
-  description?: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="mb-10">
-      <h2 className="text-2xl font-serif font-semibold mb-1">{title}</h2>
-      {description && (
-        <p className="text-navy-400 text-sm mb-4">{description}</p>
-      )}
-      <div className="card">{children}</div>
-    </div>
-  );
-}
-
-function ResourceList({
-  items,
-}: {
-  items: { label: string; href: string; description?: string }[];
-}) {
+function LinkList({ items }: { items: { label: string; href: string; desc?: string }[] }) {
   return (
     <ul className="space-y-3">
       {items.map((r) => (
@@ -109,8 +67,8 @@ function ResourceList({
             {r.label}
             <span className="text-navy-300 ml-1">&rarr;</span>
           </a>
-          {r.description && (
-            <p className="text-navy-400 text-xs mt-0.5">{r.description}</p>
+          {r.desc && (
+            <p className="text-navy-400 text-xs mt-0.5">{r.desc}</p>
           )}
         </li>
       ))}
@@ -130,46 +88,39 @@ export default function ResourcesPage() {
           tools to help you through your citizenship application.
         </p>
 
-        <ResourceSection title="Official Government Resources">
-          <ResourceList items={officialResources} />
-        </ResourceSection>
+        <h2 className="text-2xl font-serif font-semibold mb-4">Official Government Resources</h2>
+        <div className="card mb-8">
+          <LinkList items={officialResources} />
+        </div>
 
-        <ResourceSection
-          title="Legal Analysis & Guides"
-          description="Law firm analyses and expert commentary on Bill C-3 and citizenship by descent."
-        >
-          <ResourceList items={legalResources} />
-        </ResourceSection>
+        <h2 className="text-2xl font-serif font-semibold mb-1">Legal Analysis &amp; Guides</h2>
+        <p className="text-navy-400 text-sm mb-4">Law firm analyses and expert commentary on Bill C-3 and citizenship by descent.</p>
+        <div className="card mb-8">
+          <LinkList items={legalResources} />
+        </div>
 
-        <ResourceSection
-          title="Provincial Vital Statistics Offices"
-          description="Order long-form birth certificates from each Canadian province and territory. Always request the \"long form\" showing both parents' names."
-        >
-          <ResourceList
-            items={PROVINCIAL_VITAL_STATS.map((p) => ({
-              label: p.province,
-              href: p.href,
-            }))}
-          />
-        </ResourceSection>
+        <h2 className="text-2xl font-serif font-semibold mb-1">Provincial Vital Statistics Offices</h2>
+        <p className="text-navy-400 text-sm mb-4">Order long-form birth certificates from each Canadian province and territory. Always request the long form showing both parents&apos; names.</p>
+        <div className="card mb-8">
+          <LinkList items={PROVINCIAL_VITAL_STATS.map((p) => ({ label: p.province, href: p.href }))} />
+        </div>
 
-        <ResourceSection
-          title="US Birth Certificate & Document Resources"
-          description="For US-based applicants who need to order their own birth certificates."
-        >
-          <ResourceList items={usResources} />
-        </ResourceSection>
+        <h2 className="text-2xl font-serif font-semibold mb-1">US Birth Certificate &amp; Document Resources</h2>
+        <p className="text-navy-400 text-sm mb-4">For US-based applicants who need to order their own birth certificates.</p>
+        <div className="card mb-8">
+          <LinkList items={usResources} />
+        </div>
 
-        <ResourceSection
-          title="Genealogy & Historical Records"
-          description="For tracing your Canadian ancestry and finding historical vital records."
-        >
-          <ResourceList items={genealogyResources} />
-        </ResourceSection>
+        <h2 className="text-2xl font-serif font-semibold mb-1">Genealogy &amp; Historical Records</h2>
+        <p className="text-navy-400 text-sm mb-4">For tracing your Canadian ancestry and finding historical vital records.</p>
+        <div className="card mb-8">
+          <LinkList items={genealogyResources} />
+        </div>
 
-        <ResourceSection title="Community Resources">
-          <ResourceList items={communityResources} />
-        </ResourceSection>
+        <h2 className="text-2xl font-serif font-semibold mb-4">Community Resources</h2>
+        <div className="card">
+          <LinkList items={communityResources} />
+        </div>
       </div>
     </div>
   );
