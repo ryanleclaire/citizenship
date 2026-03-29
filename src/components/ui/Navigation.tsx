@@ -52,7 +52,7 @@ export default function Navigation() {
                   Dashboard
                 </Link>
                 <a
-                  href="/auth/signout"
+                  href="/api/auth/signout"
                   className="ml-1 px-3 py-2 rounded-md text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
                 >
                   Log Out
@@ -113,7 +113,7 @@ function MobileMenu({
                 Dashboard
               </Link>
               <a
-                href="/auth/signout"
+                href="/api/auth/signout"
                 className="block w-full text-left px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
               >
                 Log Out
