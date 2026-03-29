@@ -150,6 +150,26 @@ export default function DashboardPage() {
             </p>
           </Link>
           <Link
+            href="/vault"
+            className={`card group hover:shadow-md transition-shadow ${
+              !isPaid ? "opacity-60" : ""
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="font-serif font-semibold text-navy group-hover:text-red transition-colors">
+                Document Vault
+              </h3>
+              {!isPaid && (
+                <span className="text-[10px] font-bold uppercase tracking-wider text-red bg-red-50 px-1.5 py-0.5 rounded">
+                  Pro
+                </span>
+              )}
+            </div>
+            <p className="text-sm text-navy-400 mt-1">
+              Track, organize &amp; upload your documents.
+            </p>
+          </Link>
+          <Link
             href="/guide"
             className="card group hover:shadow-md transition-shadow"
           >

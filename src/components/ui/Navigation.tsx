@@ -10,6 +10,7 @@ const navItems = [
   { href: "/eligibility", label: "Eligibility" },
   { href: "/family-tree", label: "Family Chain" },
   { href: "/checklist", label: "Checklist" },
+  { href: "/vault", label: "Vault" },
   { href: "/guide", label: "Guide" },
   { href: "/faq", label: "FAQ" },
   { href: "/resources", label: "Resources" },

@@ -78,6 +78,77 @@ create policy "Service role full access on applications"
   on public.applications for all
   using (auth.role() = 'service_role');
 
+-- Documents table (tracks per-document status, order info, and file uploads)
+create table public.documents (
+  id uuid default gen_random_uuid() primary key,
+  application_id uuid references public.applications(id) on delete cascade not null,
+  person_id text not null,
+  document_type text not null,
+  label text not null,
+  status text default 'needed' check (status in ('needed', 'ordered', 'received', 'uploaded')),
+  order_info text,
+  notes text,
+  file_path text,
+  file_name text,
+  file_size_bytes bigint,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+
+-- Prevent duplicate document types per person per application
+create unique index documents_app_person_type_idx
+  on public.documents (application_id, person_id, document_type);
+
+-- Enable RLS
+alter table public.documents enable row level security;
+
+-- Users can only access documents belonging to their own applications
+create policy "Users can view own documents"
+  on public.documents for select
+  using (
+    application_id in (
+      select id from public.applications where user_id = auth.uid()
+    )
+  );
+
+create policy "Users can insert own documents"
+  on public.documents for insert
+  with check (
+    application_id in (
+      select id from public.applications where user_id = auth.uid()
+    )
+  );
+
+create policy "Users can update own documents"
+  on public.documents for update
+  using (
+    application_id in (
+      select id from public.applications where user_id = auth.uid()
+    )
+  );
+
+create policy "Users can delete own documents"
+  on public.documents for delete
+  using (
+    application_id in (
+      select id from public.applications where user_id = auth.uid()
+    )
+  );
+
+create policy "Service role full access on documents"
+  on public.documents for all
+  using (auth.role() = 'service_role');
+
+-- Document vault storage bucket (run via Supabase dashboard)
+-- insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+-- values (
+--   'document-vault',
+--   'document-vault',
+--   false,
+--   10485760,
+--   array['image/jpeg', 'image/png', 'image/webp', 'application/pdf']
+-- );
+
 -- Updated_at trigger
 create or replace function public.update_updated_at()
 returns trigger as $$
@@ -93,4 +164,8 @@ create trigger profiles_updated_at
 
 create trigger applications_updated_at
   before update on public.applications
+  for each row execute procedure public.update_updated_at();
+
+create trigger documents_updated_at
+  before update on public.documents
   for each row execute procedure public.update_updated_at();
