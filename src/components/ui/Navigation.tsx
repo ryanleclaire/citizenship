@@ -16,7 +16,18 @@ const navItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+
+  async function handleLogout() {
+    console.log("LOG OUT CLICKED");
+    try {
+      await signOut();
+      console.log("SIGN OUT COMPLETE");
+    } catch (err) {
+      console.error("SIGN OUT ERROR:", err);
+    }
+    window.location.href = "/";
+  }
 
   return (
     <nav className="bg-navy text-white">
@@ -51,7 +62,12 @@ export default function Navigation() {
                 >
                   Dashboard
                 </Link>
-                <LogoutButton />
+                <button
+                  onClick={handleLogout}
+                  className="ml-1 px-3 py-2 rounded-md text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  Log Out
+                </button>
               </>
             ) : (
               <Link
@@ -62,7 +78,7 @@ export default function Navigation() {
               </Link>
             )}
           </div>
-          <MobileMenu pathname={pathname} user={user} />
+          <MobileMenu pathname={pathname} user={user} onLogout={handleLogout} />
         </div>
       </div>
     </nav>
@@ -72,9 +88,11 @@ export default function Navigation() {
 function MobileMenu({
   pathname,
   user,
+  onLogout,
 }: {
   pathname: string;
   user: { id: string } | null;
+  onLogout: () => void;
 }) {
   return (
     <div className="md:hidden">
@@ -107,7 +125,12 @@ function MobileMenu({
               >
                 Dashboard
               </Link>
-              <MobileLogoutButton />
+              <button
+                onClick={onLogout}
+                className="block w-full text-left px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
+              >
+                Log Out
+              </button>
             </>
           ) : (
             <Link
@@ -120,41 +143,5 @@ function MobileMenu({
         </div>
       </details>
     </div>
-  );
-}
-
-function LogoutButton() {
-  const { signOut } = useAuth();
-
-  async function handleLogout() {
-    await signOut();
-    window.location.href = "/";
-  }
-
-  return (
-    <button
-      onClick={handleLogout}
-      className="ml-1 px-3 py-2 rounded-md text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-    >
-      Log Out
-    </button>
-  );
-}
-
-function MobileLogoutButton() {
-  const { signOut } = useAuth();
-
-  async function handleLogout() {
-    await signOut();
-    window.location.href = "/";
-  }
-
-  return (
-    <button
-      onClick={handleLogout}
-      className="block w-full text-left px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
-    >
-      Log Out
-    </button>
   );
 }
