@@ -2,56 +2,276 @@
 
 import { useState } from "react";
 
-const faqs = [
+const faqCategories = [
   {
-    question: "Can I claim Canadian citizenship through a grandparent?",
-    answer:
-      "Yes, but you can't skip a generation. Bill C-3 retroactively restores your parent's citizenship (even if they never knew about it), which then flows to you. You document the entire chain on your application — your parent does NOT need to apply first.",
+    title: "Eligibility & Generation Counting",
+    faqs: [
+      {
+        question: "Can I claim Canadian citizenship through a grandparent?",
+        answer:
+          "Yes, but you can't skip a generation. Bill C-3 retroactively restores your parent's citizenship (even if they never knew about it), which then flows to you. You document the entire chain on your application — your parent does NOT need to apply first.",
+      },
+      {
+        question: "My Canadian ancestor is 4+ generations back. Is there a limit?",
+        answer:
+          "For anyone born before December 15, 2025, there is NO generational limit under Bill C-3. The practical limit is documentation — the further back you go, the harder it is to obtain long-form birth certificates for every link in the chain. G4+ claims are strongly advised to consult an immigration lawyer.",
+      },
+      {
+        question: "Does my parent need to get their citizenship certificate before I can apply?",
+        answer:
+          "No. This is one of the most common misconceptions. You document the entire chain of descent on your own application. IRCC does not require ancestors in the chain to hold citizenship certificates. However, if your parent already has their certificate, include a copy — it simplifies IRCC's review.",
+      },
+      {
+        question: "What if my ancestor was naturalized rather than born in Canada?",
+        answer:
+          "Naturalized Canadians count as anchor ancestors (G0). You need proof of their naturalization — either a naturalization certificate, a citizenship certificate, or historical naturalization records from Library and Archives Canada. Note: before 1947, Canadians were \"British subjects\" not \"Canadian citizens,\" so naturalization records from that era can be tricky.",
+      },
+      {
+        question: "I was born before 1977 and my mother was Canadian but my father was not. Am I eligible?",
+        answer:
+          "Bill C-3 addresses many \"Lost Canadian\" scenarios including pre-1977 gender discrimination cases. If your mother was Canadian but couldn't pass citizenship due to old discriminatory rules, Bill C-3 likely restores your citizenship retroactively. These cases can be complex — the community strongly recommends consulting a lawyer.",
+      },
+      {
+        question: "My ancestor left Canada as a baby and never lived there as an adult. Does that matter?",
+        answer:
+          "No, for the retroactive provision. If the ancestor was born in Canada or naturalized there, they are Canadian for the purposes of the chain. Length of residency in Canada is irrelevant for people born before December 15, 2025.",
+      },
+      {
+        question: "Is there a deadline to apply?",
+        answer:
+          "No. Citizenship is recognized by operation of law, not granted as a new benefit. There is no deadline. You are already a citizen — you're simply applying for proof (a Citizenship Certificate).",
+      },
+      {
+        question: "What if my ancestor is deceased?",
+        answer:
+          "Death does NOT break the chain. Citizenship is recognized retroactively regardless of whether the person ever applied for, knew about, or held a citizenship certificate. Provide a death certificate to help establish identity and timeline.",
+      },
+      {
+        question: "What is the substantial connection test?",
+        answer:
+          "For children born on or after December 15, 2025, to a Canadian parent who was also born abroad, the parent must demonstrate at least 1,095 days (3 years) of cumulative physical presence in Canada before the child's birth. The days do NOT need to be consecutive. This only applies to future births — if you were born before December 15, 2025, no physical presence test applies.",
+      },
+    ],
   },
   {
-    question: "Does my parent need to apply for citizenship first?",
-    answer:
-      "No. You document the chain of descent yourself on your CIT 0001 application. IRCC doesn't require citizenship certificates for your parent or other ancestors — just birth certificates showing the parent-child relationships in each generation.",
+    title: "Documents & Birth Certificates",
+    faqs: [
+      {
+        question: "What exactly is a \"long-form\" birth certificate?",
+        answer:
+          "A long-form birth certificate is the full-size document that shows the child's name, date of birth, place of birth, AND both parents' full names. It is NOT the wallet-sized card, the \"computer abstract,\" or the short-form certificate. When ordering from any vital statistics office, explicitly ask for the \"long form\" or \"full form\" showing parental information. The wrong format is the #1 reason for application delays.",
+      },
+      {
+        question: "I only have a short-form birth certificate. Will that work?",
+        answer:
+          "Almost certainly not. IRCC specifically requires long-form certificates showing parents' names. Short-form, computer abstracts, wallet cards, and baptismal certificates are generally rejected. Order the long-form now — vital statistics offices can take weeks to months depending on the province or state.",
+      },
+      {
+        question: "My ancestor's birth certificate has a different name than their other documents. What do I do?",
+        answer:
+          "Name discrepancies are extremely common, especially with older records. You need \"bridging documents\": marriage certificates (maiden to married name), legal name change documents, statutory declarations, or immigration records showing both names. Include a clear explanation in your cover letter mapping each discrepancy. Unexplained name discrepancies are a common reason for Procedural Fairness Letters or application returns.",
+      },
+      {
+        question: "My ancestor was born before birth registration was mandatory. What can I use?",
+        answer:
+          "For very old records (especially pre-1900 in some provinces), baptismal/church records may be accepted as substitutes when no government record exists. Census records, immigration records, and parish records can also support your case. Check Library and Archives Canada, provincial archives, FamilySearch.org, and Ancestry.ca for historical records. If no birth certificate or equivalent exists, consult a lawyer about presenting alternative evidence.",
+      },
+      {
+        question: "Do I need certified copies or will photocopies work?",
+        answer:
+          "Send clear COLOR photocopies of documents you want to keep. IRCC may request originals later if they have concerns. Poor quality black-and-white photocopies are a common reason for returns — make sure every detail is legible. Some applicants send certified true copies (notarized) for important documents as a middle ground.",
+      },
+    ],
   },
   {
-    question: "Is there a deadline to apply?",
-    answer:
-      "No. Citizenship is recognized by operation of law, not granted as a new benefit. There is no deadline. You are already a citizen — you're simply applying for proof (a Citizenship Certificate).",
+    title: "Quebec Ancestry",
+    faqs: [
+      {
+        question: "My ancestor was born in Quebec. Are there special challenges?",
+        answer:
+          "Yes. Quebec did not have mandatory government (civil) registration of births until 1994. Before that, births were recorded by churches — primarily Catholic parish registers. This means for ancestors born before 1994, a government-issued \"long-form birth certificate\" in the usual sense may not exist. Instead, the primary record may be a baptismal certificate (acte de baptême) from the parish church. The Directeur de l'état civil du Québec has since compiled many older church records into the civil registry, so you can often obtain an official birth certificate even for pre-1994 births — but the process can be slow and the records may be incomplete for very old entries.",
+      },
+      {
+        question: "Does IRCC accept Quebec baptismal certificates?",
+        answer:
+          "IRCC generally requires a government-issued long-form birth certificate and does not accept baptismal certificates as a standalone substitute. However, for Quebec ancestors born before 1994, IRCC recognizes the unique situation. Your best approach: first request an official birth certificate from the Directeur de l'état civil du Québec — they have incorporated many pre-1994 church records. If the Directeur cannot produce one (especially for very old records), include the baptismal certificate along with a cover letter explaining that Quebec did not have civil registration before 1994 and that the baptismal record is the only official record of birth. Supporting documents like census records and marriage records strengthen the case.",
+      },
+      {
+        question: "How do I obtain birth records from Quebec?",
+        answer:
+          "Start with the Directeur de l'état civil du Québec (etatcivil.gouv.qc.ca) — they can issue official birth certificates for many pre-1994 births since older church records were transferred to the civil registry. If that fails, try: (1) the parish church or diocesan archives where the baptism was recorded, (2) BAnQ (Bibliothèque et Archives nationales du Québec), which holds the Drouin Collection of digitized parish records, (3) FamilySearch.org and Ancestry.ca, which have extensive digitized Quebec church records. You can order from the Directeur by mail from outside Canada.",
+      },
+      {
+        question: "What are \"dit\" names and how do I handle them on my application?",
+        answer:
+          "The \"dit\" (also called \"dit name\") tradition is a Quebec/French-Canadian naming practice where families used an alternate surname. For example, \"Lafleur dit Beaulieu\" means the family was formally \"Lafleur\" but known as \"Beaulieu.\" Over generations, descendants might use either name or drop the \"dit\" entirely. This creates significant confusion in citizenship applications when a birth certificate shows one name and a marriage or death certificate shows the other. Explain the dit name tradition clearly in your cover letter, map how the names connect, and provide any supporting documents showing the name usage across records.",
+      },
+      {
+        question: "My Quebec ancestor's records are in French (or Latin). Do I need a translation?",
+        answer:
+          "Yes. All documents not in English or French must be accompanied by a certified translation AND a translator's affidavit. French-language documents do NOT need translation since French is an official language of Canada. However, very old Quebec parish records (pre-1800s) were sometimes written in Latin — these do require certified translation. If your records are in French and you're submitting from the US, no translation is needed, but you may want to include a brief English summary in your cover letter for clarity.",
+      },
+    ],
   },
   {
-    question: "What if my ancestor is deceased?",
-    answer:
-      "Death does NOT break the chain. Citizenship is recognized retroactively regardless of whether the person ever applied for, knew about, or held a citizenship certificate. Provide a death certificate to help establish identity and timeline.",
+    title: "The Application Form (CIT 0001)",
+    faqs: [
+      {
+        question: "What are the most common mistakes on the CIT 0001 form?",
+        answer:
+          "The top mistakes reported by applicants: (1) Opening the PDF in a web browser instead of Adobe Acrobat Reader — fields don't work correctly. (2) Leaving sections blank instead of writing \"NA\". (3) Forgetting to physically sign the form after printing. (4) Not including information about every person in the chain of descent. (5) Citing the wrong section of the Citizenship Act. (6) Missing dates or incomplete addresses.",
+      },
+      {
+        question: "Which section of the Citizenship Act do I cite on my application?",
+        answer:
+          "This depends on your situation: s. 3(1)(b) for first generation born abroad to a Canadian parent (born before Feb 15, 1977); s. 3(1)(f) for born abroad to a Canadian parent (born after Feb 14, 1977, before April 17, 2009); s. 3(1)(g) for second and subsequent generations born abroad under Bill C-3 (retroactive, born before Dec 15, 2025); s. 3(1)(g.1) for the prospective provision (born on/after Dec 15, 2025, with substantial connection test). If unsure, explain your situation in the cover letter and let IRCC determine the applicable provision.",
+      },
+      {
+        question: "Should I fill out one application per family member?",
+        answer:
+          "Yes — one CIT 0001 form per applicant. Each person needs their own form, photos, and fee payment. However, you CAN submit multiple family applications in one envelope with a master cover letter explaining the relationships. This helps IRCC process them together.",
+      },
+    ],
   },
   {
-    question: "Should I apply online or by paper?",
-    answer:
-      "Paper for most Bill C-3 claims (G2 and beyond). The IRCC online portal was designed for straightforward first-generation cases. Paper applications allow you to include complex lineage documents, a cover letter mapping your family tree, and all supporting records.",
+    title: "Cover Letters",
+    faqs: [
+      {
+        question: "Do I need a cover letter? IRCC doesn't list it as required.",
+        answer:
+          "While not technically required, the overwhelming community consensus is YES — absolutely include one, especially for any multi-generational claim. A well-written cover letter maps the family tree generation by generation, cites the applicable legal section, explains name discrepancies, and notes deceased individuals. It can be the difference between smooth processing and a Procedural Fairness Letter. Think of it as making the IRCC officer's job easy.",
+      },
+      {
+        question: "What should a cover letter include?",
+        answer:
+          "A proven structure: (1) Opening — state who you are and that you're applying under a specific section. (2) Family tree — list each generation from anchor (G0) to applicant with full names, dates and places of birth. (3) Legal basis — cite the specific provision (e.g., s. 3(1)(g) as amended by Bill C-3). (4) Document mapping — list every document included and what it proves. (5) Name discrepancy explanations if any. (6) Notes on deceased ancestors if applicable. (7) Closing — contact information and willingness to provide additional documentation.",
+      },
+    ],
   },
   {
-    question: "How long does processing take?",
-    answer:
-      "Approximately 10 months as of early 2026, though multi-generational claims may take longer. IRCC's 2026-2027 target is to process 80% of citizenship applications within 12 months. The surge in applications following Bill C-3 has created processing backlogs.",
+    title: "Submitting & Processing",
+    faqs: [
+      {
+        question: "Should I apply online or by paper?",
+        answer:
+          "Paper for almost all Bill C-3 claims involving G2 or beyond. The IRCC online portal was designed for straightforward first-generation cases and doesn't have adequate fields or upload capability for multi-generational chains. Even some G1 applicants use paper when their case has any complexity.",
+      },
+      {
+        question: "What shipping method should I use?",
+        answer:
+          "ALWAYS use tracked courier (FedEx, UPS, DHL, or Canada Post Xpresspost). Never use regular untracked mail. Use the courier address: 49 Dorchester Street, Sydney, Nova Scotia B1P 5Z2 — NOT a PO Box. Courier companies cannot deliver to PO boxes. Keep your tracking number as proof of delivery.",
+      },
+      {
+        question: "How long does processing take?",
+        answer:
+          "Approximately 10 months as of early 2026 for straightforward cases. Multi-generational Bill C-3 claims may take longer due to the surge in applications. After mailing, expect an Acknowledgment of Receipt (AOR) within 4-8 weeks. If you haven't received one after 8 weeks, follow up with IRCC.",
+      },
+      {
+        question: "My application was returned. Now what?",
+        answer:
+          "Don't panic. Common reasons: wrong birth certificate format, missing documents, missing fee receipt, photos not meeting specs, form sections left blank, or poor quality photocopies. The return letter will specify what's wrong. Fix the issue and resubmit. Unfortunately, your original submission date is NOT preserved — you go to the back of the queue. This is why getting it right the first time is critical.",
+      },
+      {
+        question: "What is a Procedural Fairness Letter (PFL)?",
+        answer:
+          "A PFL means IRCC has concerns about your application but is giving you a chance to address them before making a final decision. This is NOT a rejection. Common triggers include unexplained name discrepancies, questions about the chain of descent, or missing documentation. Respond promptly and thoroughly — many successful applicants received PFLs and resolved the issues.",
+      },
+      {
+        question: "Can I expedite my application?",
+        answer:
+          "IRCC offers urgent processing only in specific circumstances: imminent travel, medical emergencies, employment requiring proof of citizenship, or humanitarian reasons. You generally need to already have an application in progress. Do not misrepresent your urgency — IRCC takes misrepresentation seriously.",
+      },
+    ],
   },
   {
-    question: "Do I owe Canadian taxes if I become a citizen?",
-    answer:
-      "Generally no, if you continue to reside outside Canada. Canada taxes based on residency, not citizenship (unlike the United States). However, individual situations vary — consult a cross-border tax advisor for personalized advice.",
+    title: "CBSA Records & Physical Presence",
+    faqs: [
+      {
+        question: "Should I request my own CBSA entry/exit records?",
+        answer:
+          "NO. On the CIT 0001 form, there is a consent checkbox authorizing IRCC to request CBSA records on your behalf. Check YES and let IRCC pull the records. Multiple applicants report that requesting your own CBSA records and including them actually DELAYS processing, because IRCC still pulls their own copy and the duplicate causes confusion.",
+      },
+      {
+        question: "What evidence should I provide for the substantial connection test (1,095 days)?",
+        answer:
+          "Check the CBSA consent box, but also include other evidence of physical presence: T4 slips, employment records, pay stubs, school transcripts, enrollment letters, provincial health cards, rental agreements, utility bills, bank statements, and passport stamps. Don't rely solely on CBSA records — build the strongest case you can with multiple types of evidence.",
+      },
+    ],
   },
   {
-    question: "Will this affect my US citizenship or other citizenship?",
-    answer:
-      "Canada allows dual and multiple citizenship. The US also generally allows it, though there are nuances. Consult a lawyer for advice specific to your situation. Many people successfully hold both Canadian and US citizenship.",
+    title: "Photos & ID Requirements",
+    faqs: [
+      {
+        question: "What counts as acceptable ID for the application?",
+        answer:
+          "You need two pieces of ID, both showing full name and date of birth, with at least one bearing a photo. Common combinations: driver's license + passport, driver's license + state ID. NOT accepted: birth certificates, SIN cards, bank cards, credit cards, or library cards. For US applicants, a US driver's license + US passport is the most common combination.",
+      },
+      {
+        question: "What are the citizenship photo specifications?",
+        answer:
+          "IRCC citizenship photos are NOT the same as passport photos. Key specs: 50mm x 70mm (2\" x 2.75\"), head size 31-36mm from chin to crown, white background, no glasses, taken within 6 months, and the photographer must stamp/sign the back. Go to a professional photographer and specifically ask for \"Canadian citizenship photo specifications.\" Incorrect photos are a very common reason for application returns.",
+      },
+    ],
   },
   {
-    question: "What's the difference between a birth certificate and a long-form birth certificate?",
-    answer:
-      "A long-form birth certificate shows the child's full name, date of birth, place of birth, AND both parents' full names. Short-form certificates, computer abstracts (wallet-sized cards), and baptismal certificates are generally NOT accepted by IRCC. The wrong format is the #1 reason for application delays.",
+    title: "Lawyers & Professional Help",
+    faqs: [
+      {
+        question: "Do I need an immigration lawyer?",
+        answer:
+          "It depends on complexity. G1 claims (parent born in Canada) are usually straightforward enough to handle yourself. G2 claims (grandparent as anchor) — many people do it themselves, but a lawyer review helps. G3+ claims, Lost Canadian scenarios, name discrepancies, missing records, or adoption cases — legal counsel is strongly recommended. Some lawyers offer flat-fee \"document review\" services ($500-$2,000 CAD) where they review your completed package before submission.",
+      },
+      {
+        question: "How do I find a good immigration lawyer or consultant?",
+        answer:
+          "Look for lawyers or RCICs (Regulated Canadian Immigration Consultants) who specifically advertise Bill C-3 or citizenship by descent expertise. Check the College of Immigration and Citizenship Consultants (CICC) register for verified RCICs, and provincial law society directories for immigration lawyers. Be wary of \"immigration consultants\" who are NOT registered with CICC — using an unauthorized representative can jeopardize your application.",
+      },
+    ],
   },
   {
-    question: "What is the substantial connection test?",
-    answer:
-      "For children born on or after December 15, 2025, to a Canadian parent who was also born abroad, the parent must demonstrate at least 1,095 days (3 years) of cumulative physical presence in Canada before the child's birth. The days do NOT need to be consecutive. This only applies to future births — if you were born before December 15, 2025, no physical presence test applies.",
+    title: "Tax & Dual Citizenship",
+    faqs: [
+      {
+        question: "Do I owe Canadian taxes if I become a citizen?",
+        answer:
+          "Generally no, if you continue to reside outside Canada. Canada taxes based on residency, not citizenship (unlike the United States). However, if you have Canadian-source income (rental property, investments) or establish \"significant residential ties\" to Canada (home, spouse, dependents, bank accounts, driver's license), CRA may consider you a tax resident. Getting a citizenship certificate alone does NOT make you a tax resident. Consult a cross-border tax advisor.",
+      },
+      {
+        question: "Will getting Canadian citizenship affect my US citizenship?",
+        answer:
+          "No. Both Canada and the US allow dual citizenship. Acquiring Canadian citizenship by recognition (not through your own voluntary naturalization in another country) does not trigger US expatriation provisions. Many people successfully hold both. Consult a lawyer if you have specific concerns.",
+      },
+      {
+        question: "Can I renounce Canadian citizenship if I don't want it?",
+        answer:
+          "Yes. Bill C-3 includes a simplified renunciation process for people who gained citizenship automatically but don't want it. However, there's no need to renounce unless you have a specific reason — some countries don't allow dual citizenship, and certain security clearances may be affected.",
+      },
+    ],
+  },
+  {
+    title: "Practical Tips",
+    faqs: [
+      {
+        question: "How should I organize my paper application package?",
+        answer:
+          "Recommended order: (1) Cover letter on top. (2) CIT 0001 form, signed. (3) Fee receipt (one copy attached, keep one). (4) Two citizenship photos in a small envelope, paper-clipped — NOT stapled or glued. (5) Your documents (birth certificate, two IDs). (6) Chain of descent documents in generational order (G0 first, working forward). (7) Supporting documents (marriage certificates, death certificates, name change docs). (8) CIT 0014 checklist filled out as a table of contents. (9) Translations with affidavits. Use colored tabs or dividers to separate sections.",
+      },
+      {
+        question: "What are the top mistakes to avoid?",
+        answer:
+          "The community's most-reported mistakes: (1) Ordering short-form birth certificates instead of long-form. (2) Not including a cover letter. (3) Applying online when paper is more appropriate. (4) Requesting own CBSA records instead of using the consent checkbox. (5) Opening CIT 0001 in a browser instead of Adobe Acrobat Reader. (6) Leaving form fields blank instead of writing \"NA\". (7) Sending poor quality photocopies. (8) Not using tracked shipping. (9) Forgetting to sign the printed form. (10) Not explaining name discrepancies.",
+      },
+      {
+        question: "Can I travel to Canada while my application is processing?",
+        answer:
+          "If you are not yet recognized as a Canadian citizen, you travel as a citizen of your current country. US citizens can visit Canada without a visa for up to 6 months. Having a pending citizenship application does not give you any special entry status. Do NOT attempt to use Canadian citizen entry lanes or claim Canadian citizenship at the border before receiving your certificate.",
+      },
+      {
+        question: "What happens after I submit?",
+        answer:
+          "The typical timeline reported by applicants: (1) Submit via tracked courier. (2) Receive Acknowledgment of Receipt (AOR) letter in 4-8 weeks. (3) Wait several months. (4) Possibly receive a Procedural Fairness Letter if IRCC has questions. (5) Decision — approval or refusal. (6) If approved, citizenship certificate mailed to you. Total: approximately 10 months as of early 2026, possibly longer for complex cases.",
+      },
+    ],
   },
 ];
 
@@ -91,13 +311,26 @@ export default function FAQPage() {
           Frequently Asked Questions
         </h1>
         <p className="text-navy-400 mb-10">
-          Common questions about Bill C-3 and the citizenship certificate application process.
+          Common questions about Bill C-3 and the citizenship certificate
+          application process, compiled from official sources and the applicant
+          community.
         </p>
-        <div>
-          {faqs.map((faq) => (
-            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
-          ))}
-        </div>
+        {faqCategories.map((category) => (
+          <div key={category.title} className="mb-10">
+            <h2 className="text-xl font-serif font-semibold text-navy mb-2">
+              {category.title}
+            </h2>
+            <div>
+              {category.faqs.map((faq) => (
+                <FAQItem
+                  key={faq.question}
+                  question={faq.question}
+                  answer={faq.answer}
+                />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
