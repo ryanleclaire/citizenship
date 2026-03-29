@@ -16,7 +16,7 @@ export const PLANS = {
       "Document checklist (save progress)",
       "Cover letter builder",
       "PDF export",
-      "Track 1 applicant",
+      "Track pre-submission for 1 applicant",
     ],
   },
   family: {
@@ -26,7 +26,7 @@ export const PLANS = {
     period: "month",
     features: [
       "Everything in Individual",
-      "Track up to 10 family members",
+      "Track pre-submission for up to 10 family members",
       "Manage everyone from one account",
     ],
   },

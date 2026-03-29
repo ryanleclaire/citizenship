@@ -16,7 +16,7 @@ const plans = [
       "Document checklist — save progress",
       "Cover letter builder",
       "PDF export of chain & checklist",
-      "Track 1 applicant",
+      "Track pre-submission for 1 applicant",
       "Cancel anytime",
     ],
     highlight: true,
@@ -29,7 +29,7 @@ const plans = [
     description: "For families applying together.",
     features: [
       "Everything in Individual",
-      "Track up to 10 family members",
+      "Track pre-submission for up to 10 family members",
       "Manage everyone from one account",
       "Cancel anytime",
     ],
