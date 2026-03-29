@@ -316,8 +316,8 @@ export default function FAQPage() {
           community.
         </p>
         {faqCategories.map((category) => (
-          <div key={category.title} className="mb-10">
-            <h2 className="text-xl font-serif font-semibold text-navy mb-2">
+          <div key={category.title} className="mb-12">
+            <h2 className="text-2xl font-serif font-bold text-navy mb-4 pl-4 border-l-4 border-red">
               {category.title}
             </h2>
             <div>
