@@ -381,7 +381,7 @@ export default function VaultPage() {
           <h1 className="text-3xl md:text-4xl font-serif font-bold mb-3">Document Vault</h1>
           <div className="card text-center py-10">
             <p className="text-navy-400 mb-4">
-              You don&apos;t have any saved applications yet. Build your family chain first, then come back here to track your documents.
+              You don&apos;t have any saved documents in your vault yet. Build your family chain first, then come back here to track your documents.
             </p>
             <Link href="/family-tree" className="btn-primary">Build Your Family Chain</Link>
           </div>
