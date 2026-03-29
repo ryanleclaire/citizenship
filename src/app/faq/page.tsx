@@ -184,7 +184,7 @@ const faqCategories = [
       {
         question: "How long does processing take?",
         answer:
-          "Nobody knows. It could take 2 months. It could take 2 years. Processing times vary widely and IRCC does not provide reliable estimates for individual cases. You can ask for urgent processing under certain conditions, but there is no guarantee IRCC will grant it — they may not even notify you of the decision and you may simply receive a ruling at some point. After mailing, expect an Acknowledgment of Receipt (AOR) within a few weeks.",
+          "IRCC's stated target is approximately 10 months for citizenship certificate applications. However, some urgent applications have been approved in as little as 2 months, while more complicated or incomplete submissions needing resubmission could take significantly longer. You can request urgent processing under certain conditions, but there is no guarantee IRCC will grant it. After mailing, expect an Acknowledgment of Receipt (AOR) within a few weeks.",
       },
       {
         question: "Can I submit more documents after my application is accepted?",
