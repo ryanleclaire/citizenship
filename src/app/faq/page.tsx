@@ -51,6 +51,16 @@ const faqCategories = [
         answer:
           "For children born on or after December 15, 2025, to a Canadian parent who was also born abroad, the parent must demonstrate at least 1,095 days (3 years) of cumulative physical presence in Canada before the child's birth. The days do NOT need to be consecutive. This only applies to future births — if you were born before December 15, 2025, no physical presence test applies.",
       },
+      {
+        question: "If my application is granted, when does my citizenship begin?",
+        answer:
+          "Your application is for proof that you already are a citizen by descent — it is not an application for citizenship. If approved, your citizenship began on the date of your birth OR on a date near 1947 (the specific date depends on the province of birth of your ancestor), whichever is later. The 1947 date corresponds to when the Canadian Citizenship Act first came into force.",
+      },
+      {
+        question: "I plan to have a baby soon and want my child to be Canadian. What should I do?",
+        answer:
+          "For children born on or after December 15, 2025 to a Canadian parent born abroad, you have three options: (1) Spend at least 1,095 days (3 years) in Canada at any time during your life before your child is born — this satisfies the substantial connection test. (2) Have your baby in Canada — anyone born in Canada is a Canadian citizen. (3) After your baby is born outside Canada, sponsor your child for permanent residence, move to Canada, and have your child naturalized after living in Canada for the required period (generally 3 of the last 5 years).",
+      },
     ],
   },
   {
@@ -69,17 +79,17 @@ const faqCategories = [
       {
         question: "My ancestor's birth certificate has a different name than their other documents. What do I do?",
         answer:
-          "Name discrepancies are extremely common, especially with older records. You need \"bridging documents\": marriage certificates (maiden to married name), legal name change documents, statutory declarations, or immigration records showing both names. Include a clear explanation in your cover letter mapping each discrepancy. Unexplained name discrepancies are a common reason for Procedural Fairness Letters or application returns.",
+          "IRCC appears to know about and follow the legal doctrine of idem sonans: if it sounds the same, it is the same. Common name variations like Richard/Rich/Dick, Robert/Bob, Sue/Susie/Susan have been accepted. Dropped or swapped middle and first names have been accepted. For records before the 1930s, even age variations have been overlooked where other evidence shows it was the same person. That said, it helps to include bridging documents: marriage certificates, legal name change documents, statutory declarations, or immigration records showing both names. Always explain discrepancies in your cover letter.",
       },
       {
         question: "My ancestor was born before birth registration was mandatory. What can I use?",
         answer:
-          "For very old records (especially pre-1900 in some provinces), baptismal/church records may be accepted as substitutes when no government record exists. Census records, immigration records, and parish records can also support your case. Check Library and Archives Canada, provincial archives, FamilySearch.org, and Ancestry.ca for historical records. If no birth certificate or equivalent exists, consult a lawyer about presenting alternative evidence.",
+          "Per CIT 0014 (Scenario 3, checkbox 2), you can provide \"any other evidence that your parent is a Canadian citizen, such as those described in Scenarios 4 and 5.\" IRCC has accepted alternative proof for ancestors born before their province kept birth records. Look for census records, marriage records, death records, and even children's birth records — all of which may show country of birth. Church/baptismal records, immigration records, and parish records can also support your case. Check Library and Archives Canada, provincial archives, FamilySearch.org, and Ancestry.ca.",
       },
       {
         question: "Do I need certified copies or will photocopies work?",
         answer:
-          "Send clear COLOR photocopies of documents you want to keep. IRCC may request originals later if they have concerns. Poor quality black-and-white photocopies are a common reason for returns — make sure every detail is legible. Some applicants send certified true copies (notarized) for important documents as a middle ground.",
+          "Certified copies are NOT required. The instructions only require color copies, and IRCC has approved numerous applications without certified copies. Send clear color photocopies and make sure every detail is legible. In the few instances where IRCC wants a certified copy, they will ask you for it. Do not offer certified copies in your cover letter unless you have them — some applicants report IRCC asked for them only because they were mentioned in the letter.",
       },
     ],
   },
@@ -127,9 +137,19 @@ const faqCategories = [
           "This depends on your situation: s. 3(1)(b) for first generation born abroad to a Canadian parent (born before Feb 15, 1977); s. 3(1)(f) for born abroad to a Canadian parent (born after Feb 14, 1977, before April 17, 2009); s. 3(1)(g) for second and subsequent generations born abroad under Bill C-3 (retroactive, born before Dec 15, 2025); s. 3(1)(g.1) for the prospective provision (born on/after Dec 15, 2025, with substantial connection test). If unsure, explain your situation in the cover letter and let IRCC determine the applicable provision.",
       },
       {
+        question: "Which box should I check at the top of page 1 of CIT 0001?",
+        answer:
+          "You can check any or all of the last three boxes. All are valid grounds for requesting a Proof of Citizenship.",
+      },
+      {
+        question: "Which box should I check for my parent's citizenship?",
+        answer:
+          "If you are claiming citizenship by descent, check the box next to \"Parent 1 is/was a Canadian citizen\" and then indicate \"Parent obtained citizenship by descent\" or \"Parent obtained citizenship by birth in Canada\" depending on their circumstances.",
+      },
+      {
         question: "Should I fill out one application per family member?",
         answer:
-          "Yes — one CIT 0001 form per applicant. Each person needs their own form, photos, and fee payment. However, you CAN submit multiple family applications in one envelope with a master cover letter explaining the relationships. This helps IRCC process them together.",
+          "Yes — one CIT 0001 form per applicant, each with their own CIT 0014, photos, and identity documents. However, you CAN submit multiple applications in one envelope. Pay the fee for everyone at once and put the receipt first. If everyone shares the same lineage, you can send one set of supporting evidence for the group. Be careful with large groups, though — if IRCC determines any required document is missing for any one person, the entire packet will be returned and everyone's application will be delayed by 4-6 weeks.",
       },
     ],
   },
@@ -164,12 +184,17 @@ const faqCategories = [
       {
         question: "How long does processing take?",
         answer:
-          "Approximately 10 months as of early 2026 for straightforward cases. Multi-generational Bill C-3 claims may take longer due to the surge in applications. After mailing, expect an Acknowledgment of Receipt (AOR) within 4-8 weeks. If you haven't received one after 8 weeks, follow up with IRCC.",
+          "Nobody knows. It could take 2 months. It could take 2 years. Processing times vary widely and IRCC does not provide reliable estimates for individual cases. You can ask for urgent processing under certain conditions, but there is no guarantee IRCC will grant it — they may not even notify you of the decision and you may simply receive a ruling at some point. After mailing, expect an Acknowledgment of Receipt (AOR) within a few weeks.",
+      },
+      {
+        question: "Can I submit more documents after my application is accepted?",
+        answer:
+          "Yes. If your application is accepted (rather than returned), you will receive an Acknowledgment of Receipt (AOR) and you can upload additional documents electronically using IRCC's web form. If it is returned because it is incomplete, the entire packet comes back and you must fix the error and resubmit on paper. You will not have to pay the fee a second time.",
       },
       {
         question: "My application was returned. Now what?",
         answer:
-          "Don't panic. Common reasons: wrong birth certificate format, missing documents, missing fee receipt, photos not meeting specs, form sections left blank, or poor quality photocopies. The return letter will specify what's wrong. Fix the issue and resubmit. Unfortunately, your original submission date is NOT preserved — you go to the back of the queue. This is why getting it right the first time is critical.",
+          "Don't panic. Common reasons: wrong birth certificate format, missing documents, missing fee receipt, photos not meeting specs, form sections left blank, or poor quality photocopies. The return letter will specify what's wrong. Fix the issue and resubmit the entire packet on paper. You will not have to pay the fee again. Unfortunately, your original submission date is NOT preserved — you go to the back of the queue. This is why getting it right the first time is critical.",
       },
       {
         question: "What is a Procedural Fairness Letter (PFL)?",
@@ -254,7 +279,7 @@ const faqCategories = [
       {
         question: "How should I organize my paper application package?",
         answer:
-          "Recommended order: (1) Cover letter on top. (2) CIT 0001 form, signed. (3) Fee receipt (one copy attached, keep one). (4) Two citizenship photos in a small envelope, paper-clipped — NOT stapled or glued. (5) Your documents (birth certificate, two IDs). (6) Chain of descent documents in generational order (G0 first, working forward). (7) Supporting documents (marriage certificates, death certificates, name change docs). (8) CIT 0014 checklist filled out as a table of contents. (9) Translations with affidavits. Use colored tabs or dividers to separate sections.",
+          "Do NOT staple or bind your documents — IRCC scans all applications and then shreds the originals. If you bind the papers together, you're just making it harder for them. Use paperclips. Number each page on the bottom right-hand corner so that if someone drops the packet, they can easily put things back in order. Recommended order: (1) Cover letter on top. (2) CIT 0001 form, signed. (3) Fee receipt (one copy attached, keep one). (4) Two citizenship photos in a small envelope, paper-clipped. (5) Your documents (birth certificate, two IDs). (6) Chain of descent documents in generational order (G0 first, working forward). (7) Supporting documents (marriage certificates, death certificates, name change docs). (8) CIT 0014 checklist filled out as a table of contents. (9) Translations with affidavits.",
       },
       {
         question: "What are the top mistakes to avoid?",
@@ -269,7 +294,7 @@ const faqCategories = [
       {
         question: "What happens after I submit?",
         answer:
-          "The typical timeline reported by applicants: (1) Submit via tracked courier. (2) Receive Acknowledgment of Receipt (AOR) letter in 4-8 weeks. (3) Wait several months. (4) Possibly receive a Procedural Fairness Letter if IRCC has questions. (5) Decision — approval or refusal. (6) If approved, citizenship certificate mailed to you. Total: approximately 10 months as of early 2026, possibly longer for complex cases.",
+          "The typical sequence: (1) Submit via tracked courier. (2) Receive Acknowledgment of Receipt (AOR) letter — timing varies. (3) Wait — this is the longest phase and can range from a few months to well over a year. (4) Possibly receive a Procedural Fairness Letter (PFL) if IRCC has questions — this is not a rejection. (5) Decision — approval or refusal. (6) If approved, citizenship certificate mailed to you. There is no reliable estimate for total processing time.",
       },
     ],
   },
