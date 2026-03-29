@@ -86,7 +86,7 @@ function ProgressSummary({ documents }: { documents: DocumentRecord[] }) {
 
 function DocumentRow({
   doc,
-  personName,
+  personName: _personName,
   onUpdate,
   onUpload,
   onDownload,
