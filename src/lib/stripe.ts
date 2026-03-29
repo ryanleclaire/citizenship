@@ -26,10 +26,16 @@ export const PLANS = {
     period: "month",
     features: [
       "Everything in Individual",
-      "Unlimited family member applications",
+      "Up to 10 family member applications",
       "Manage all applications from one account",
     ],
   },
 } as const;
 
 export type PlanType = keyof typeof PLANS;
+
+export const PLAN_APPLICATION_LIMITS: Record<string, number> = {
+  free: 0,
+  individual: 1,
+  family: 10,
+};

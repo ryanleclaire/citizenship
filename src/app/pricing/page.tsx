@@ -29,7 +29,7 @@ const plans = [
     description: "For families applying together.",
     features: [
       "Everything in Individual",
-      "Unlimited family member applications",
+      "Up to 10 family member applications",
       "Manage all applications from one account",
       "Cancel anytime",
     ],
