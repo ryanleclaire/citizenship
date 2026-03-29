@@ -86,13 +86,11 @@ function ProgressSummary({ documents }: { documents: DocumentRecord[] }) {
 
 function DocumentRow({
   doc,
-  personName: _personName,
   onUpdate,
   onUpload,
   onDownload,
 }: {
   doc: DocumentRecord;
-  personName: string;
   onUpdate: (updates: { status?: string; order_info?: string; notes?: string }) => void;
   onUpload: (file: File) => void;
   onDownload: () => void;
@@ -455,7 +453,6 @@ export default function VaultPage() {
                     <DocumentRow
                       key={doc.id}
                       doc={doc}
-                      personName={person.name || person.relationLabel}
                       onUpdate={(updates) => updateDocument(doc.id, updates)}
                       onUpload={(file) => uploadFile(doc.id, file)}
                       onDownload={async () => {
