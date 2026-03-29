@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   title: "Citizenship Mountie | Canadian Citizenship Under Bill C-3",
   description:
     "A step-by-step guide to applying for a Canadian citizenship certificate under Bill C-3 (2025). Check your eligibility, build your document checklist, and navigate the application process.",
+  icons: {
+    icon: "/images/favicon.png",
+    apple: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({

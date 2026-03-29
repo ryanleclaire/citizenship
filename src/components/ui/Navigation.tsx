@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
@@ -22,7 +23,8 @@ export default function Navigation() {
     <nav className="bg-navy text-white">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="font-serif text-lg font-bold tracking-tight">
+          <Link href="/" className="flex items-center gap-2 font-serif text-lg font-bold tracking-tight">
+            <Image src="/images/favicon.png" alt="" width={28} height={28} className="rounded-sm" />
             Citizenship Mountie
           </Link>
           <div className="hidden md:flex items-center gap-1">
