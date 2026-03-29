@@ -273,7 +273,10 @@ export default function VaultPage() {
 
   // Load user's applications
   useEffect(() => {
-    if (!user || !isPaid) return;
+    if (!user || !isPaid) {
+      setInitLoading(false);
+      return;
+    }
     async function loadApps() {
       const res = await fetch("/api/applications");
       const data = await res.json();
