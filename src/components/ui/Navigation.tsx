@@ -16,18 +16,7 @@ const navItems = [
 
 export default function Navigation() {
   const pathname = usePathname();
-  const { user, signOut } = useAuth();
-
-  async function handleLogout() {
-    console.log("LOG OUT CLICKED");
-    try {
-      await signOut();
-      console.log("SIGN OUT COMPLETE");
-    } catch (err) {
-      console.error("SIGN OUT ERROR:", err);
-    }
-    window.location.href = "/";
-  }
+  const { user } = useAuth();
 
   return (
     <nav className="bg-navy text-white">
@@ -62,12 +51,12 @@ export default function Navigation() {
                 >
                   Dashboard
                 </Link>
-                <button
-                  onClick={handleLogout}
+                <a
+                  href="/auth/signout"
                   className="ml-1 px-3 py-2 rounded-md text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
                 >
                   Log Out
-                </button>
+                </a>
               </>
             ) : (
               <Link
@@ -78,7 +67,7 @@ export default function Navigation() {
               </Link>
             )}
           </div>
-          <MobileMenu pathname={pathname} user={user} onLogout={handleLogout} />
+          <MobileMenu pathname={pathname} user={user} />
         </div>
       </div>
     </nav>
@@ -88,11 +77,9 @@ export default function Navigation() {
 function MobileMenu({
   pathname,
   user,
-  onLogout,
 }: {
   pathname: string;
   user: { id: string } | null;
-  onLogout: () => void;
 }) {
   return (
     <div className="md:hidden">
@@ -125,12 +112,12 @@ function MobileMenu({
               >
                 Dashboard
               </Link>
-              <button
-                onClick={onLogout}
+              <a
+                href="/auth/signout"
                 className="block w-full text-left px-4 py-2 text-sm text-white/75 hover:text-white hover:bg-white/10"
               >
                 Log Out
-              </button>
+              </a>
             </>
           ) : (
             <Link
