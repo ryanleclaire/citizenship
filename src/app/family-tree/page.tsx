@@ -7,6 +7,7 @@ import {
   type ChainPerson,
   buildChain,
   getDocumentsForPerson,
+  getAnchorDocuments,
 } from "@/lib/family-chain";
 
 const chainOptions = [
@@ -130,7 +131,13 @@ export default function FamilyTreePage() {
       setChain((prev) => {
         if (!prev) return prev;
         const next = [...prev];
-        next[index] = { ...next[index], ...updates };
+        const person = { ...next[index], ...updates };
+        // Rebuild anchor documents when Quebec toggle changes
+        if (updates.bornInQuebec !== undefined && person.role === "anchor") {
+          person.documents = getAnchorDocuments(updates.bornInQuebec);
+          person.checkedDocs = new Set();
+        }
+        next[index] = person;
         return next;
       });
     },
@@ -384,15 +391,31 @@ function PersonCard({
 
       {/* Deceased toggle (not for applicant) */}
       {person.role !== "applicant" && (
-        <label className="flex items-center gap-2 mb-4 cursor-pointer text-sm text-navy-400">
-          <input
-            type="checkbox"
-            checked={person.isDeceased}
-            onChange={(e) => onUpdate({ isDeceased: e.target.checked })}
-            className="h-4 w-4 rounded border-gray-300 accent-red"
-          />
-          This person is deceased
-        </label>
+        <div className="space-y-2 mb-4">
+          <label className="flex items-center gap-2 cursor-pointer text-sm text-navy-400">
+            <input
+              type="checkbox"
+              checked={person.isDeceased}
+              onChange={(e) => onUpdate({ isDeceased: e.target.checked })}
+              className="h-4 w-4 rounded border-gray-300 accent-red"
+            />
+            This person is deceased
+          </label>
+          {person.role === "anchor" && (
+            <label className="flex items-center gap-2 cursor-pointer text-sm text-navy-400">
+              <input
+                type="checkbox"
+                checked={person.bornInQuebec}
+                onChange={(e) => onUpdate({ bornInQuebec: e.target.checked })}
+                className="h-4 w-4 rounded border-gray-300 accent-red"
+              />
+              This person was born in Quebec
+              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">
+                Special docs
+              </span>
+            </label>
+          )}
+        </div>
       )}
 
       {/* Document checklist */}

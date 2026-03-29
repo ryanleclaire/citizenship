@@ -14,6 +14,7 @@ export interface ChainPerson {
   birthPlace: string;
   birthYear: string;
   isDeceased: boolean;
+  bornInQuebec: boolean;
   documents: PersonDocument[];
   checkedDocs: Set<string>;
 }
@@ -31,7 +32,36 @@ function getRelationLabel(distanceFromApplicant: number): string {
   return RELATION_LABELS[distanceFromApplicant] ?? `${distanceFromApplicant}x Great-Grandparent`;
 }
 
-function getAnchorDocuments(): PersonDocument[] {
+function getAnchorDocuments(bornInQuebec: boolean): PersonDocument[] {
+  if (bornInQuebec) {
+    return [
+      {
+        id: "anchor-quebec-birth",
+        label: "Quebec birth certificate (copie d'acte de naissance)",
+        description: "Request from the Directeur de l'\u00e9tat civil du Qu\u00e9bec. This is the Quebec equivalent of a long-form birth certificate.",
+        required: true,
+      },
+      {
+        id: "anchor-quebec-baptismal",
+        label: "OR Baptismal certificate (if no civil record exists)",
+        description: "For pre-1994 births where the Directeur has no record. Include a negative search letter from the Directeur and explain Quebec's civil registration history in your cover letter.",
+        required: false,
+      },
+      {
+        id: "anchor-quebec-negative-search",
+        label: "Directeur negative search letter",
+        description: "Letter confirming no civil record exists. Strengthens your case when submitting a baptismal certificate.",
+        required: false,
+      },
+      {
+        id: "anchor-naturalization",
+        label: "OR Naturalization certificate/record",
+        description: "If naturalized rather than born in Canada.",
+        required: false,
+      },
+    ];
+  }
+
   return [
     {
       id: "anchor-birth-cert",
@@ -139,7 +169,8 @@ export function buildChain(generationCount: number): ChainPerson[] {
     birthPlace: "",
     birthYear: "",
     isDeceased: false,
-    documents: getAnchorDocuments(),
+    bornInQuebec: false,
+    documents: getAnchorDocuments(false),
     checkedDocs: new Set(),
   });
 
@@ -155,6 +186,7 @@ export function buildChain(generationCount: number): ChainPerson[] {
       birthPlace: "",
       birthYear: "",
       isDeceased: false,
+      bornInQuebec: false,
       documents: getIntermediateDocuments(`person-${i}`),
       checkedDocs: new Set(),
     });
@@ -170,6 +202,7 @@ export function buildChain(generationCount: number): ChainPerson[] {
     birthPlace: "",
     birthYear: "",
     isDeceased: false,
+    bornInQuebec: false,
     documents: getApplicantDocuments(),
     checkedDocs: new Set(),
   });
@@ -185,4 +218,4 @@ export function getDocumentsForPerson(person: ChainPerson): PersonDocument[] {
   return docs;
 }
 
-export { getNameChangeDocuments, getDeceasedDocuments };
+export { getAnchorDocuments, getNameChangeDocuments, getDeceasedDocuments };
