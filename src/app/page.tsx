@@ -29,8 +29,8 @@ export default function Home() {
             <Link href="/eligibility" className="btn-primary text-lg px-8 py-4">
               Check Your Eligibility
             </Link>
-            <Link href="/guide" className="btn-outline text-lg px-8 py-4">
-              View the Guide
+            <Link href="/family-tree" className="btn-outline text-lg px-8 py-4">
+              Build Your Family Chain
             </Link>
           </div>
         </div>
