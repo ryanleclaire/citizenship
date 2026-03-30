@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
-const faqCategories = [
+const faqCategories: {
+  title: string;
+  faqs: { question: string; answer: string | ReactNode }[];
+}[] = [
   {
     title: "Eligibility & Generation Counting",
     faqs: [
@@ -298,9 +301,107 @@ const faqCategories = [
       },
     ],
   },
+  {
+    title: "About Citizenship Mountie",
+    faqs: [
+      {
+        question: "What is the difference between the free and paid levels?",
+        answer: (
+          <div className="space-y-4">
+            <p>
+              Citizenship Mountie offers a free tier with full access to educational content, plus paid plans
+              that unlock personalized tools to help you prepare your application.
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border border-gray-200 rounded-lg">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="text-left py-2 px-3 font-semibold text-navy border-b">Feature</th>
+                    <th className="text-center py-2 px-3 font-semibold text-navy border-b">Free</th>
+                    <th className="text-center py-2 px-3 font-semibold text-navy border-b">Individual ($9/mo)</th>
+                    <th className="text-center py-2 px-3 font-semibold text-navy border-b">Family ($17/mo)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-navy-400">
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">Eligibility quiz</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">Step-by-step application guide</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">FAQ &amp; resource library</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">Family Chain Builder (save &amp; edit)</td>
+                    <td className="py-2 px-3 text-center text-navy-300">&mdash;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">Document Vault (track &amp; upload)</td>
+                    <td className="py-2 px-3 text-center text-navy-300">&mdash;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">AI Cover Letter Drafter</td>
+                    <td className="py-2 px-3 text-center text-navy-300">&mdash;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">Document checklist (save progress)</td>
+                    <td className="py-2 px-3 text-center text-navy-300">&mdash;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr className="border-b border-gray-100">
+                    <td className="py-2 px-3">PDF export</td>
+                    <td className="py-2 px-3 text-center text-navy-300">&mdash;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                    <td className="py-2 px-3 text-center text-green-600">&#10003;</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 px-3">Track pre-submission for applicants</td>
+                    <td className="py-2 px-3 text-center text-navy-300">&mdash;</td>
+                    <td className="py-2 px-3 text-center">1 applicant</td>
+                    <td className="py-2 px-3 text-center">Up to 10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              The free tier gives you everything you need to understand the process. Paid plans add
+              the tools that make preparing your actual application faster and more organized.
+            </p>
+          </div>
+        ),
+      },
+      {
+        question: "Is Citizenship Mountie affiliated with the Canadian government?",
+        answer:
+          "No. Citizenship Mountie is an independent informational tool. It is not affiliated with, endorsed by, or connected to Immigration, Refugees and Citizenship Canada (IRCC) or the Government of Canada. For official information, always refer to IRCC's website at canada.ca.",
+      },
+      {
+        question: "Does Citizenship Mountie provide legal advice?",
+        answer:
+          "No. Citizenship Mountie provides general guidance to help you understand and navigate the citizenship certificate application process. It is not a substitute for legal advice. Immigration law is complex, and individual circumstances vary. For personalized advice, consult a licensed immigration lawyer or Regulated Canadian Immigration Consultant (RCIC).",
+      },
+    ],
+  },
 ];
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer }: { question: string; answer: string | ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
