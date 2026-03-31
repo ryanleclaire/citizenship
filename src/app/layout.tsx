@@ -41,6 +41,15 @@ export default function RootLayout({
           <footer className="bg-navy text-white/60 py-8">
             <div className="max-w-6xl mx-auto px-4 space-y-4">
               <Disclaimer />
+              <div className="flex justify-center gap-4 text-xs">
+                <a href="/about" className="hover:text-white transition-colors">About Us</a>
+                <span className="text-white/30">|</span>
+                <a href="/faq" className="hover:text-white transition-colors">FAQ</a>
+                <span className="text-white/30">|</span>
+                <a href="/resources" className="hover:text-white transition-colors">Resources</a>
+                <span className="text-white/30">|</span>
+                <a href="/pricing" className="hover:text-white transition-colors">Pricing</a>
+              </div>
               <p className="text-center text-xs">
                 &copy; {new Date().getFullYear()} Citizenship Mountie. Not affiliated with the Government of Canada.
               </p>
