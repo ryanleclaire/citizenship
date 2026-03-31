@@ -133,9 +133,18 @@ export default function PrivacyPolicyPage() {
           <section>
             <h2 className="text-xl font-serif font-bold text-navy">9. Children&apos;s Privacy</h2>
             <p>
-              The Service is not directed at children under 13. We do not knowingly collect personal
-              information from children under 13. If you believe a child has provided us with personal
-              information, please contact us so we can delete it.
+              The Service is intended for use by adults (age 13 and older). We do not knowingly
+              collect personal information directly from children under 13. However, because
+              Canadian citizenship applications for minors are filed by parents or guardians,
+              adult account holders on our Family plan may enter information about their minor
+              children and upload documents on their behalf. This parent-provided data about minors
+              is covered by the same privacy protections described in this policy and is accessible
+              only through the parent&apos;s authenticated account.
+            </p>
+            <p className="mt-2">
+              If you believe a child under 13 has independently created an account or provided us
+              with personal information without parental consent, please contact us so we can
+              delete it.
             </p>
           </section>
 
