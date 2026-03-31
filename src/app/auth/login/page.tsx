@@ -133,6 +133,12 @@ export default function LoginPage() {
             Sign up
           </Link>
         </p>
+        <p className="text-center text-xs text-navy-300 mt-4">
+          By signing in, you agree to our{" "}
+          <Link href="/terms" className="text-red hover:underline">Terms of Service</Link>
+          {" "}and{" "}
+          <Link href="/privacy" className="text-red hover:underline">Privacy Policy</Link>.
+        </p>
       </div>
     </div>
   );

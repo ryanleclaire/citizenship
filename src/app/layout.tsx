@@ -49,6 +49,10 @@ export default function RootLayout({
                 <a href="/resources" className="hover:text-white transition-colors">Resources</a>
                 <span className="text-white/30">|</span>
                 <a href="/pricing" className="hover:text-white transition-colors">Pricing</a>
+                <span className="text-white/30">|</span>
+                <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+                <span className="text-white/30">|</span>
+                <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
               </div>
               <p className="text-center text-xs">
                 &copy; {new Date().getFullYear()} Citizenship Mountie. Not affiliated with the Government of Canada.
