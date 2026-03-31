@@ -57,6 +57,16 @@ export default function AboutPage() {
             is a former school district administrator and classroom teacher.
           </p>
         </div>
+
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <h2 className="text-2xl font-serif font-bold text-navy mb-3">Contact</h2>
+          <p className="text-navy-400">
+            Have a question, suggestion, or just want to say hello? Reach us at{" "}
+            <a href="mailto:contact@citizenshipmountie.com" className="text-red hover:underline font-medium">
+              contact@citizenshipmountie.com
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
