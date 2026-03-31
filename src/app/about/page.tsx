@@ -43,10 +43,10 @@ export default function AboutPage() {
           <p>
             Like many new applicants, Ryan found himself tracking his progress in spreadsheets,
             juggling file folders, and scattering images of vital records across his desktop. He
-            realized that if the process was this overwhelming for him, it had to be even harder
-            for the hundreds of thousands of others who were newly eligible. So he set about
-            building the tool he wished had existed &mdash; a single guided experience that
-            consolidates everything into one place.
+            figured he probably wasn&apos;t the only one struggling to keep it all straight &mdash;
+            and that there had to be a better way. So he set about building the tool he wished
+            had existed &mdash; a single guided experience that consolidates everything into
+            one place.
           </p>
 
           <p>
