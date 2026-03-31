@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
@@ -15,6 +16,12 @@ export default function SignupPage() {
   async function handleSignup(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+
+    if (!ageConfirmed) {
+      setError("You must confirm that you are 13 years of age or older.");
+      return;
+    }
+
     setLoading(true);
 
     if (password.length < 6) {
@@ -41,6 +48,10 @@ export default function SignupPage() {
   }
 
   async function handleGoogleSignup() {
+    if (!ageConfirmed) {
+      setError("You must confirm that you are 13 years of age or older.");
+      return;
+    }
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
@@ -86,6 +97,23 @@ export default function SignupPage() {
         </div>
 
         <div className="card">
+          {error && (
+            <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2 mb-4">
+              {error}
+            </p>
+          )}
+
+          {/* Age confirmation */}
+          <label className="flex items-start gap-2 cursor-pointer text-sm text-navy-400 mb-4">
+            <input
+              type="checkbox"
+              checked={ageConfirmed}
+              onChange={(e) => { setAgeConfirmed(e.target.checked); setError(""); }}
+              className="h-4 w-4 mt-0.5 rounded border-gray-300 accent-red shrink-0"
+            />
+            <span>I confirm that I am 13 years of age or older</span>
+          </label>
+
           {/* Google Signup */}
           <button
             onClick={handleGoogleSignup}
@@ -134,12 +162,6 @@ export default function SignupPage() {
               />
               <p className="text-xs text-navy-300 mt-1">Minimum 6 characters</p>
             </div>
-
-            {error && (
-              <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2">
-                {error}
-              </p>
-            )}
 
             <button
               type="submit"
