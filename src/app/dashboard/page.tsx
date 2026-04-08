@@ -9,6 +9,7 @@ export default function DashboardPage() {
   const { user, profile, loading, isPaid, refreshProfile } = useAuth();
   const router = useRouter();
   const [portalLoading, setPortalLoading] = useState(false);
+  const [justSubscribed, setJustSubscribed] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -20,11 +21,29 @@ export default function DashboardPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("subscribed") === "true") {
-      refreshProfile();
+      setJustSubscribed(true);
       window.history.replaceState({}, "", "/dashboard");
+
+      // Poll for subscription activation (webhook may take a few seconds)
+      let attempts = 0;
+      const interval = setInterval(async () => {
+        await refreshProfile();
+        attempts++;
+        if (attempts >= 10) {
+          clearInterval(interval);
+        }
+      }, 2000);
+      return () => clearInterval(interval);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Clear the banner once the tier updates
+  useEffect(() => {
+    if (justSubscribed && isPaid) {
+      setJustSubscribed(false);
+    }
+  }, [justSubscribed, isPaid]);
 
   async function openPortal() {
     setPortalLoading(true);
@@ -76,8 +95,28 @@ export default function DashboardPage() {
           </div>
         </div>
 
+        {/* Subscription activating banner */}
+        {justSubscribed && !isPaid && (
+          <div className="card border-green-300 border-2 bg-green-50/30 mb-8">
+            <div className="flex items-center gap-3">
+              <svg className="w-5 h-5 text-green-600 animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+              <div>
+                <p className="font-serif font-semibold text-navy">
+                  Payment received! Your subscription is being activated...
+                </p>
+                <p className="text-sm text-navy-400 mt-0.5">
+                  This usually takes just a few seconds.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Upgrade prompt for free users */}
-        {!isPaid && (
+        {!isPaid && !justSubscribed && (
           <div className="card border-red border-2 bg-red-50/30 mb-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>

@@ -22,9 +22,17 @@ export async function POST(request: Request) {
     // Check if user already has a Stripe customer ID
     const { data: profile } = await supabase
       .from("profiles")
-      .select("stripe_customer_id")
+      .select("stripe_customer_id, stripe_subscription_id")
       .eq("id", user.id)
       .single();
+
+    // Block checkout if user already has an active subscription
+    if (profile?.stripe_subscription_id) {
+      return NextResponse.json(
+        { error: "You already have an active subscription. Visit your dashboard to manage it." },
+        { status: 409 }
+      );
+    }
 
     let customerId = profile?.stripe_customer_id;
 
